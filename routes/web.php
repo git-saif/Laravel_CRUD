@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
+Route::get('/check', function () {
+    return view('components.dashboard');
 });
 
 Route::get('/dashboard', function () {
