@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@section('title', 'Smart ERP - Dashboard')
 
 
     <div class="main-content-inner">

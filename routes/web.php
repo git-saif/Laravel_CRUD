@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/check', function () {
+Route::get('/dashboard', function () {
     return view('components.dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('components.CRUD.index');
+// Route::get('/', function () {
+//     return view('components.CRUD.index');
     
+// });
+
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+
+    Route::resources([
+
+        'crud' => CrudController::class,
+
+    ]);
 });
