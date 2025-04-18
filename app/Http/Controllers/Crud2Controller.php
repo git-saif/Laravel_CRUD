@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CrudController extends Controller
+class Crud2Controller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('components.CRUD.index');
+        return view('components.CRUD-2.index');
     }
 
     /**
@@ -19,7 +19,7 @@ class CrudController extends Controller
      */
     public function create()
     {
-        return view('components.CRUD.create');
+        return view('components.CRUD-2.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class CrudController extends Controller
      */
     public function edit(string $id)
     {
-        return view('components.CRUD.edit');
+        return view('components.CRUD-2.edit');
     }
 
     /**
