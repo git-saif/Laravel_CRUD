@@ -55,11 +55,11 @@
                                 <div class="clearfix">
                                     <div class="pull-right tableTools-container"></div>
                                 </div>
-                                <div class="widget-header widget-header-flat ">
-                                    <h4 class="widget-title">Create Data</h4>
+                                <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
+                                    <h4 class="widget-title" style="color: #fff;">Create Data</h4>
 
                                     <span class="widget-toolbar">
-                                        <a href="{{ route('dashboard.crud.index') }}">
+                                        <a href="{{ route('dashboard.crud.index') }}" style="color: #fff;">
                                             <i class="ace-icon fa fa-plus"></i> Go To Index
                                         </a>
                                     </span>

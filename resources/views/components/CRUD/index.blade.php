@@ -52,15 +52,16 @@
                             <div class="clearfix">
                                 <div class="pull-right tableTools-container"></div>
                             </div>
-                            <div class="widget-header widget-header-flat ">
-                                <h4 class="widget-title">CRUD List</h4>
+                            <div class="widget-header widget-header-flat" style="background-color: #618f8f;">
+                                <h4 class="widget-title " style="color: #fff;">CRUD List</h4>
 
                                 <span class="widget-toolbar">
-                                    <a href="{{ route('dashboard.crud.create') }}">
+                                    <a href="{{ route('dashboard.crud.create') }}" style="color: #fff;">
                                         <i class="ace-icon fa fa-plus"></i> Create Position
                                     </a>
                                 </span>
                             </div>
+
 
                             <!-- div.table-responsive -->
 
@@ -110,11 +111,12 @@
                                                 </td>
                                                 <td>
                                                     <div class="hidden-sm hidden-xs action-buttons">
-                                                        <!-- <a class="blue" href="#">
-                                                        <i class="ace-icon fa fa-eye bigger-130"></i>
-                                                    </a> -->
+                                                        <a class="blue" href="#">
+                                                            <i class="ace-icon fa fa-eye bigger-130"></i>
+                                                        </a>
 
-                                                        <a class="green" href="{{ route('dashboard.crud.edit', $item->id) }}">
+                                                        <a class="green"
+                                                            href="{{ route('dashboard.crud.edit', $item->id) }}">
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>
 

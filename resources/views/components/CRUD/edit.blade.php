@@ -28,11 +28,11 @@
                             <div class="col-md-2"></div>
 
                             <div class="col-md-8">
-                                <div class="widget-header widget-header-flat ">
-                                    <h4 class="widget-title">Edit Data</h4>
+                                <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
+                                    <h4 class="widget-title" style="color: #fff;">Edit Data</h4>
 
                                     <span class="widget-toolbar">
-                                        <a href="{{ route('dashboard.crud.index') }}">
+                                        <a href="{{ route('dashboard.crud.index') }}" style="color: #fff;">
                                             <i class="ace-icon fa fa-list"></i> Back to List
                                         </a>
                                     </span>
