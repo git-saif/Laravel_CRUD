@@ -21,7 +21,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                            autocomplete="off" />
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -51,14 +52,14 @@
                             <div class="clearfix">
                                 <div class="pull-right tableTools-container"></div>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center ">
-                                <div class="table-header d-flex justify-content-between align-items-stretch">
-                                    <span> Index of Table</span>
-                                    <a href="{{ route('dashboard.crud.create') }}" class="pull-right btn btn-sm btn-white h-100 d-flex align-items-center" style="margin-left: auto;">
-                                        <i class="fa fa-plus me-1"></i> Create Table
-                                    </a>
-                                </div>
+                            <div class="widget-header widget-header-flat ">
+                                <h4 class="widget-title">CRUD List</h4>
 
+                                <span class="widget-toolbar">
+                                    <a href="{{ route('dashboard.crud.create') }}">
+                                        <i class="ace-icon fa fa-plus"></i> Create Position
+                                    </a>
+                                </span>
                             </div>
 
                             <!-- div.table-responsive -->
@@ -80,35 +81,71 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td style="font-weight: bold;"> 01. </td>
-                                            <td> Saiful Islam </td>
-                                            <td> +880 1234 5678 </td>
-                                            <td> Saif@example.com </td>
-                                            <td> Here is Image </td>
 
-                                            <td>
-                                                <span class="label label-sm label-success arrowed-in">Active</span>
-                                            </td>
+                                        @php
+                                            $sl = $crudData->firstItem() ?? 0;
+                                        @endphp
 
-                                            <td>
-                                                <div class="hidden-sm hidden-xs action-buttons">
-                                                    <a class="blue" href="#">
+
+
+                                        @forelse ($crudData as  $item)
+                                            <tr>
+                                                <td style="font-weight: bold;"> {{ $sl++ }}. </td>
+                                                <td> {{ $item->name }} </td>
+                                                <td> {{ $item->phone }} </td>
+                                                <td> {{ $item->email }} </td>
+                                                <td>
+                                                    <img src="{{ asset($item->image) ?? '' }}" alt="Image"
+                                                        width="100">
+
+                                                </td>
+                                                <td>
+                                                    @if ($item->status == 'active')
+                                                        <span
+                                                            class="label label-sm label-success arrowed-in">Active</span>
+                                                    @else
+                                                        <span
+                                                            class="label label-sm label-danger arrowed-in">Inactive</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <div class="hidden-sm hidden-xs action-buttons">
+                                                        <!-- <a class="blue" href="#">
                                                         <i class="ace-icon fa fa-eye bigger-130"></i>
-                                                    </a>
+                                                    </a> -->
 
-                                                    <a class="green" href="#">
-                                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                                    </a>
+                                                        <a class="green" href="{{ route('dashboard.crud.edit', $item->id) }}">
+                                                            <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                                        </a>
 
-                                                    <a class="red" href="#">
-                                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                        <form action="{{ route('dashboard.crud.destroy', $item->id) }}"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('Are you sure you want to delete this item?');">
+
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="red"
+                                                                style="border: none; background: none;">
+                                                                <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center text-danger">No data found.</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+
+                                <div class="text-center">
+                                    {{ $crudData->links('pagination::bootstrap-4') }}
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
