@@ -43,7 +43,7 @@ class CrudController extends Controller
                 $image = $request->file('image');
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/images/crud'), $filename);
-                $img_path = 'uploads/images/crud/' . $filename; // ✅ Full relative path save
+                $img_path = 'uploads/images/crud/' . $filename; 
             }
 
 

@@ -21,7 +21,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                            autocomplete="off" />
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -52,11 +53,14 @@
                                 <div class="pull-right tableTools-container"></div>
                             </div>
                             <div class="d-flex justify-content-between align-items-center ">
-                                <div class="table-header d-flex justify-content-between align-items-stretch">
-                                    <span> Index of Table</span>
-                                    <a href="{{ route('dashboard.crud.create') }}" class="pull-right btn btn-sm btn-white h-100 d-flex align-items-center" style="margin-left: auto;">
-                                        <i class="fa fa-plus me-1"></i> Create Table
-                                    </a>
+                                <div class="widget-header widget-header-flat" style="background-color: #618f8f;">
+                                    <h4 class="widget-title " style="color: #fff;">CRUD List</h4>
+
+                                    <span class="widget-toolbar">
+                                        <a href="{{ route('dashboard.crud-2.create') }}" style="color: #fff;">
+                                            <i class="ace-icon fa fa-plus"></i> Create Position
+                                        </a>
+                                    </span>
                                 </div>
 
                             </div>
@@ -80,35 +84,71 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td style="font-weight: bold;"> 01. </td>
-                                            <td> Saiful Islam </td>
-                                            <td> +880 1234 5678 </td>
-                                            <td> Saif@example.com </td>
-                                            <td> Here is Image </td>
 
-                                            <td>
-                                                <span class="label label-sm label-success arrowed-in">Active</span>
-                                            </td>
+                                        @php
+                                            $sl = $crud2->firstItem() ?? 0;
+                                        @endphp
 
-                                            <td>
-                                                <div class="hidden-sm hidden-xs action-buttons">
-                                                    <a class="blue" href="#">
-                                                        <i class="ace-icon fa fa-eye bigger-130"></i>
-                                                    </a>
+                                        @forelse ($crud2 as $crud)
+                                            <tr>
+                                                <td style="font-weight: bold;"> 01. </td>
+                                                <td> {{ $crud->name }} </td>
+                                                <td> {{ $crud->phone }} </td>
+                                                <td> {{ $crud->email }} </td>
+                                                <td>
+                                                    <img src="{{ asset($crud->image) ?? '' }}" width="100"
+                                                        alt="">
 
-                                                    <a class="green" href="#">
-                                                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                                                    </a>
+                                                </td>
 
-                                                    <a class="red" href="#">
-                                                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    @if ($crud->status == 'active')
+                                                        <span
+                                                            class="label label-sm label-success arrowed-in">Active</span>
+                                                    @else
+                                                        <span
+                                                            class="label label-sm label-danger arrowed-in">Inactive</span>
+                                                    @endif
+                                                </td>
+
+                                                <td>
+                                                    <div class="hidden-sm hidden-xs action-buttons">
+                                                        <a class="blue" href="#">
+                                                            <i class="ace-icon fa fa-eye bigger-130"></i>
+                                                        </a>
+
+                                                        <a class="green"
+                                                            href="{{ route('dashboard.crud-2.edit', $crud->id) }}">
+                                                            <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                                        </a>
+
+                                                        <form action="{{ route('dashboard.crud-2.destroy', $crud->id) }}"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('Are you sure you want to delete this item?');">
+
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="red"
+                                                                style="border: none; background: none;">
+                                                                <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center text-danger">No data found.</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
+
+                                <div class="text-center">
+                                    {{ $crud2->links('pagination::bootstrap-4') }}
+                                </div>
+
                             </div>
                         </div>
                     </div>

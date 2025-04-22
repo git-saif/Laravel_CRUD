@@ -21,7 +21,8 @@
             <div class="nav-search" id="nav-search">
                 <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                            autocomplete="off" />
                         <i class="ace-icon fa fa-search nav-search-icon"></i>
                     </span>
                 </form>
@@ -55,11 +56,14 @@
                                     <div class="pull-right tableTools-container"></div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center ">
-                                    <div class="table-header d-flex justify-content-between align-items-stretch">
-                                        <span>Create New Table</span>
-                                        <a href="{{ route('dashboard.crud.index') }}" class="pull-right btn btn-sm btn-white h-100 d-flex align-items-center" style="margin-left: auto;">
-                                            <i class="fa fa-list me-1"></i> Back to List
-                                        </a>
+                                    <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
+                                        <h4 class="widget-title" style="color: #fff;">Create Data</h4>
+
+                                        <span class="widget-toolbar">
+                                            <a href="{{ route('dashboard.crud-2.index') }}" style="color: #fff;">
+                                                <i class="ace-icon fa fa-plus"></i> Go To Index
+                                            </a>
+                                        </span>
                                     </div>
 
                                 </div>
@@ -67,22 +71,26 @@
                                 <!-- div.table-responsive -->
 
                                 <!-- div.dataTables_borderWrap -->
-                                <form action="{{ route('dashboard.crud.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('dashboard.crud-2.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter name" required>
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Enter name" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="phone">Phone No</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="+8801XXXXXXXXX" required>
+                                        <input type="text" name="phone" class="form-control"
+                                            placeholder="+8801XXXXXXXXX" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" placeholder="example@email.com" required>
+                                        <input type="email" name="email" class="form-control"
+                                            placeholder="example@email.com" required>
                                     </div>
 
                                     <div class="form-group">
@@ -91,11 +99,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <select name="status" class="form-control" required>
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </select>
+                                        <label for="status">Status</label><br>
+
+                                        <label>
+                                            <input type="radio" name="status" value="active" checked> Active
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <input type="radio" name="status" value="inactive"> Inactive
+                                        </label>
                                     </div>
 
                                     <div class="form-actions center">

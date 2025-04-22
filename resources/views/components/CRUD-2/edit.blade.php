@@ -31,36 +31,36 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="table-header d-flex justify-content-between align-items-stretch">
                                         <span>Edit Entry</span>
-                                        <a href="{{ route('dashboard.crud.index') }}" class="pull-right btn btn-sm btn-white h-100 d-flex align-items-center" style="margin-left: auto;">
+                                        <a href="{{ route('dashboard.crud-2.index') }}" class="pull-right btn btn-sm btn-white h-100 d-flex align-items-center" style="margin-left: auto;">
                                             <i class="fa fa-list me-1"></i> Back to List
                                         </a>
                                     </div>
                                 </div>
 
                                 <!-- Edit Form Start -->
-                                <form action="{{ route('dashboard.crud.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('dashboard.crud-2.update', $crud2->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" class="form-control" value="{{ $item->name }}" required>
+                                        <input type="text" name="name" class="form-control" value="{{ $crud2->name }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="phone">Phone No</label>
-                                        <input type="text" name="phone" class="form-control" value="{{ $item->phone }}" required>
+                                        <input type="text" name="phone" class="form-control" value="{{ $crud2->phone }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" value="{{ $item->email }}" required>
+                                        <input type="email" name="email" class="form-control" value="{{ $crud2->email }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="image">Current Image</label><br>
-                                        @if ($item->image)
-                                        <img src="{{ asset('uploads/'.$item->image) }}" alt="Current Image" width="100">
+                                        @if ($crud2->image)
+                                        <img src="{{ asset($crud2->image) }}" alt="Current Image" width="100">
                                         @else
                                         <p>No image uploaded.</p>
                                         @endif
@@ -72,11 +72,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <select name="status" class="form-control" required>
-                                            <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Active</option>
-                                            <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Inactive</option>
-                                        </select>
+                                        <label for="status">Status</label><br>
+
+                                        <label>
+                                            <input type="radio" name="status" value="active"
+                                                {{ $crud2->status == 'active' ? 'checked' : '' }}> Active
+                                        </label>
+                                        {{-- &nbsp;&nbsp; --}}
+                                        <label>
+                                            <input type="radio" name="status" value="inactive"
+                                                {{ $crud2->status == 'inactive' ? 'checked' : '' }}> Inactive
+                                        </label>
                                     </div>
 
                                     <div class="form-actions center">
