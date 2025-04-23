@@ -34,25 +34,33 @@ class Crud2Controller extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
                 'phone' => 'required|string|max:255',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+                'image' => 'required|array|min:1', // min 1 image required
+                'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 'status' => 'required|in:active,inactive',
             ]);
-            // dd($validated);
 
-            $img_path = null;
+            $image_paths = [];
+
             if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imgName = time(). '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/images/crud2'), $imgName);
-                $img_path = 'uploads/images/crud2/' . $imgName;
+                foreach ($request->file('image') as $image) {
+                    if ($image->isValid()) {
+                        $imgName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                        $image->move(public_path('uploads/images/crud2'), $imgName);
+                        $image_paths[] = 'uploads/images/crud2/' . $imgName;
+                    }
+                }
             }
 
-            
+            // কমপক্ষে ১টি ইমেজ আপলোড হয়েছে কিনা চেক করুন
+            if (empty($image_paths)) {
+                return redirect()->back()->with('error', 'At least one valid image is required.');
+            }
+
             Crud2::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],
-                'image' => $img_path,
+                'image' => json_encode($image_paths),
                 'status' => $validated['status'],
             ]);
 
@@ -61,6 +69,8 @@ class Crud2Controller extends Controller
             return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
     }
+
+
 
     /**
      * Display the specified resource.
@@ -85,37 +95,78 @@ class Crud2Controller extends Controller
     public function update(Request $request, string $id)
     {
         $crud2 = Crud2::findOrFail($id);
+
         try {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255',
                 'phone' => 'required|string|max:255',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+                'existing_images' => 'sometimes|array',
+                'existing_images.*' => 'sometimes|string',
+                'delete_images' => 'sometimes|array',
+                'delete_images.*' => 'sometimes|string',
+                'replace_images' => 'sometimes|array',
+                'replace_images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'new_images' => 'sometimes|array',
+                'new_images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'status' => 'required|in:active,inactive',
             ]);
 
-            $img_path = $crud2->image;
-            if ($request->hasFile('image')) {
-                if ($crud2->image && file_exists(public_path($crud2->image))) {
-                    unlink(public_path($crud2->image));
+            // Handle existing images
+            $existingImages = is_array($crud2->image) ? $crud2->image : (json_decode($crud2->image, true) ?? []);
+
+            $updatedImages = [];
+
+            // Process existing images
+            foreach ($request->existing_images ?? [] as $index => $existingImage) {
+                // Check if image is marked for deletion
+                if (in_array($existingImage, $request->delete_images ?? [])) {
+                    if (file_exists(public_path($existingImage))) {
+                        unlink(public_path($existingImage));
+                    }
+                    continue;
                 }
-                $image = $request->file('image');
-                $imgName = time(). '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/images/crud2'), $imgName);
-                $img_path = 'uploads/images/crud2/' . $imgName;
+
+                // Check if image is being replaced
+                if ($request->hasFile("replace_images.{$index}")) {
+                    $newImage = $request->file("replace_images.{$index}");
+                    $imgName = time() . '_' . $index . '_' . uniqid() . '.' . $newImage->getClientOriginalExtension();
+                    $newImage->move(public_path('uploads/images/crud2'), $imgName);
+
+                    // Delete old image
+                    if (file_exists(public_path($existingImage))) {
+                        unlink(public_path($existingImage));
+                    }
+
+                    $updatedImages[] = 'uploads/images/crud2/' . $imgName;
+                } else {
+                    $updatedImages[] = $existingImage;
+                }
             }
 
+            // Process new images
+            if ($request->hasFile('new_images')) {
+                foreach ($request->file('new_images') as $newImage) {
+                    if ($newImage->isValid()) {
+                        $imgName = time() . '_n_' . uniqid() . '.' . $newImage->getClientOriginalExtension();
+                        $newImage->move(public_path('uploads/images/crud2'), $imgName);
+                        $updatedImages[] = 'uploads/images/crud2/' . $imgName;
+                    }
+                }
+            }
+
+            // Update the record
             $crud2->update([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'],
-                'image' => $img_path,
+                'image' => !empty($updatedImages) ? json_encode($updatedImages) : null,
                 'status' => $validated['status'],
             ]);
 
             return redirect()->route('dashboard.crud-2.index')->with('success', 'Data updated successfully!');
-        } catch (\Throwable $th) {
-            //throw $th;
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage())->withInput();
         }
     }
 
@@ -127,8 +178,13 @@ class Crud2Controller extends Controller
         try {
             $crud2 = Crud2::findOrFail($id);
 
-            if ($crud2->image && file_exists(public_path($crud2->image))) {
-                unlink(public_path($crud2->image));
+            // যদি একাধিক ছবি থাকে
+            if ($crud2->image && is_array($crud2->image)) {
+                foreach ($crud2->image as $imagePath) {
+                    if (file_exists(public_path($imagePath))) {
+                        unlink(public_path($imagePath));
+                    }
+                }
             }
 
             $crud2->delete();

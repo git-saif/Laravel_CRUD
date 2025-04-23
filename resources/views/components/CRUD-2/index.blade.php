@@ -91,15 +91,33 @@
 
                                         @forelse ($crud2 as $crud)
                                             <tr>
-                                                <td style="font-weight: bold;"> 01. </td>
+                                                <td style="font-weight: bold;"> {{ $sl++ }}. </td>
                                                 <td> {{ $crud->name }} </td>
                                                 <td> {{ $crud->phone }} </td>
                                                 <td> {{ $crud->email }} </td>
-                                                <td>
-                                                    <img src="{{ asset($crud->image) ?? '' }}" width="100"
-                                                        alt="">
+                                                {{-- <td>
+                                                    @if ($crud->image && is_array($crud->image))
+                                                        @foreach ($crud->image as $img)
+                                                            <img src="{{ asset($img) }}" width="100" class="mb-1"
+                                                                alt="">
+                                                        @endforeach
+                                                    @else
+                                                        <span>No image</span>
+                                                    @endif
+                                                </td> --}}
 
+                                                <td>
+                                                    @if ($crud->image)
+                                                        @foreach ($crud->image as $img)
+                                                            <img src="{{ asset($img) }}" width="100" class="mb-1"
+                                                                alt="">
+                                                        @endforeach
+                                                    @else
+                                                        <span>No image</span>
+                                                    @endif
                                                 </td>
+
+
 
                                                 <td>
                                                     @if ($crud->status == 'active')
@@ -122,7 +140,8 @@
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>
 
-                                                        <form action="{{ route('dashboard.crud-2.destroy', $crud->id) }}"
+                                                        <form
+                                                            action="{{ route('dashboard.crud-2.destroy', $crud->id) }}"
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirm('Are you sure you want to delete this item?');">
 

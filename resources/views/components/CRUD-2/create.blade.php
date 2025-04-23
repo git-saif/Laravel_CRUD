@@ -93,10 +93,18 @@
                                             placeholder="example@email.com" required>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="image">Image</label>
-                                        <input type="file" name="image" class="form-control">
+                                    {{-- Multiple Image Start --}}
+                                    <div id="image-upload-wrapper">
+                                        <div class="form-group">
+                                            <label for="image">Image (required)</label>
+                                            <input type="file" name="image[]" class="form-control" required>
+                                        </div>
                                     </div>
+
+                                    <button type="button" id="add-image" class="btn btn-info">+ Add Another
+                                        Image</button>
+
+                                    {{-- Multiple Image End --}}
 
                                     <div class="form-group">
                                         <label for="status">Status</label><br>
@@ -136,6 +144,30 @@
 </div>
 <!-- /.main-content -->
 
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+
 
 
 @endsection
+
+@push('scripts')
+<script>
+    document.getElementById('add-image').addEventListener('click', function() {
+        let newInput = document.createElement('div');
+        newInput.classList.add('form-group', 'mt-2');
+        newInput.innerHTML = `<input type="file" name="image[]" class="form-control">`;
+        document.getElementById('image-upload-wrapper').appendChild(newInput);
+    });
+</script>
+@endpush

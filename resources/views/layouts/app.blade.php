@@ -112,6 +112,12 @@
 
     <!-- inline scripts related to this page -->
     @include('layouts.includes.inline-scripts')
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- other scripts -->
+    @stack('scripts')
 </body>
 
 </html>

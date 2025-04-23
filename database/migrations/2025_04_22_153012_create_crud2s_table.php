@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('image');
+            $table->text('image'); // পরিবর্তন: string → text (to store multiple image paths as JSON)
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
