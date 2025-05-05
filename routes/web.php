@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Crud0Controller;
 use App\Http\Controllers\Crud2Controller;
 use App\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
     Route::resources([
 
+        'crud-0' => Crud0Controller::class,
         'crud' => CrudController::class,
         'crud-2' => Crud2Controller::class,
 

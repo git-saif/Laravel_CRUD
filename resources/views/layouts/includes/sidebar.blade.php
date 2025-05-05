@@ -59,6 +59,14 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
+                <li class="{{ $currentRoute == 'dashboard.crud-0.index' ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.crud-0.index') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        CRUD 
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
                 <li class="{{ $currentRoute == 'dashboard.crud.index' ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
