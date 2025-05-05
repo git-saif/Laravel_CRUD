@@ -117,8 +117,8 @@
                                         <div id="new-images-container">
                                             <div class="input-group mb-2">
                                                 <input type="file" name="new_images[]" class="form-control">
-                                                <button type="button"
-                                                    class="btn btn-danger remove-new-image">× Remove Field</button>
+                                                <button type="button" class="btn btn-danger remove-new-image">× Remove
+                                                    Field</button>
                                             </div>
                                         </div>
                                         <button type="button" id="add-new-image" class="btn btn-sm btn-primary mt-2">

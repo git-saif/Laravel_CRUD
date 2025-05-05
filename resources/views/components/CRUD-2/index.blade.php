@@ -109,7 +109,7 @@
                                                 <td>
                                                     @if ($crud->image)
                                                         @foreach ($crud->image as $img)
-                                                            <img src="{{ asset($img) }}" width="100" class="mb-1"
+                                                            <img src="{{ asset($img) }}" width="100" height="60" class="mb-1"
                                                                 alt="">
                                                         @endforeach
                                                     @else

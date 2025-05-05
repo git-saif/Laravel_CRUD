@@ -19,11 +19,11 @@ Route::get('/dashboard', function () {
     return view('components.dashboard');
 })->name('dashboard');
 
-
-// Route::get('/', function () {
-//     return view('components.CRUD.index');
-
-// });
+/*
+|--------------------------------------------------------------------------
+| Resource Routes.
+|--------------------------------------------------------------------------
+*/
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
