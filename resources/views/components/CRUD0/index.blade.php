@@ -87,6 +87,7 @@
                                         @endphp
 
 
+                                        {{-- @forelse ($posts as $post) --}}
 
                                         @forelse ($crud0 as  $item)
                                             <tr>
