@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Crud4Request;
 use App\Models\Crud4;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,13 @@ class Crud4Controller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Crud4Request $request)
     {
-        //
+        Crud4::create($request->validated());
+
+        return redirect()
+            ->route('dashboard.crud-4.index')
+            ->with('success', 'Data created successfully!');
     }
 
     /**
