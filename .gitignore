@@ -20,4 +20,4 @@ yarn-error.log
 /public/uploads
 
 
-resources/views/components/CRUD4/
+resources/views/components/CRUD-4/create.blade.php

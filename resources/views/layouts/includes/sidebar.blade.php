@@ -82,6 +82,16 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
+
+                {{-- CRUD 4 --}}
+                <li class="{{ $currentRoute == 'dashboard.crud-4.index' ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.crud-4.index') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        CRUD - 4
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                
             </ul>
         </li>
 

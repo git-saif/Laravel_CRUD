@@ -13,7 +13,8 @@ class Crud4Controller extends Controller
     public function index()
     {
         $crud4 = Crud4::orderby('id', 'asc')->paginate(3);
-        return view('components.crud4.index', compact('crud4'));
+        return view('components.CRUD-4.index', compact('crud4'));
+        // resources\views\components\CRUD-4\index.blade.php
     }
 
     /**
