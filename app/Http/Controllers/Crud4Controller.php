@@ -22,7 +22,7 @@ class Crud4Controller extends Controller
      */
     public function create()
     {
-        //
+        return view('components.CRUD-4.create');
     }
 
     /**
