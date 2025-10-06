@@ -34,8 +34,9 @@ class Crud4Controller extends Controller
         Crud4::create($request->validated());
 
         return redirect()
-            ->route('dashboard.crud-4.index')
-            ->with('success', 'Data created successfully!');
+        ->route('dashboard.crud-4.index')
+        ->with('success', 'Data created successfully!');
+        
     }
 
     /**
@@ -51,15 +52,21 @@ class Crud4Controller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $crud4 = Crud4::findOrFail($id);
+        return view('components.CRUD-4.edit', compact('crud4'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Crud4Request $request, Crud4 $crud_4)
     {
-        //
+        $crud_4->update($request->validated());
+
+        return redirect()
+            ->route('dashboard.crud-4.index')
+            ->with('success', 'Data updated successfully!');
     }
 
     /**
