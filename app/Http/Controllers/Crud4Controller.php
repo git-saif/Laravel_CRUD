@@ -74,6 +74,21 @@ class Crud4Controller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $crud_4 = Crud4::findOrFail($id);
+            $crud_4->delete();
+            return redirect()
+            ->route('dashboard.crud-4.index')
+            ->with('success', 'Data deleted successfully!');
+
+        } catch (\Throwable $th) {
+            return redirect()
+            ->back()
+            ->with('error', 'Something went wrong: ' . $th->getMessage());
+        }
     }
+
+
+
+    
 }

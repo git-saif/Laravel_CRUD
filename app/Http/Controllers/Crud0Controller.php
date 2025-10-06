@@ -95,7 +95,11 @@ class Crud0Controller extends Controller
         try {
             $crud0 = Crud0::findOrFail($id);
             $crud0->delete();
-            return redirect()->route('dashboard.crud-0.index')->with('success', 'Data successfully deleted.');
+            
+            return redirect()
+            ->route('dashboard.crud-0.index')
+            ->with('success', 'Data successfully deleted.');
+
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Something went wrong: ' . $th->getMessage());
         }
