@@ -88,7 +88,4 @@ class Crud4Controller extends Controller
         }
     }
 
-
-
-    
 }
