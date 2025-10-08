@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Crud5;
 use Illuminate\Http\Request;
+use App\Http\Requests\Crud5Request;
 
 class Crud5Controller extends Controller
 {
@@ -27,9 +28,30 @@ class Crud5Controller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Crud5Request $request)
     {
-        //
+        try {
+            $validated = $request->validated();
+
+            $img_path = null;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/images/crud5'), $filename);
+                $img_path = 'uploads/images/crud5/' . $filename;
+            }
+
+            Crud5::create([
+                'name'  => $validated['name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'],
+                'image' => $img_path,
+            ]);
+
+            return redirect()->route('dashboard.crud-5.index')->with('success', 'Data created successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Something went wrong: ' . $e->getMessage());
+        }
     }
 
     /**

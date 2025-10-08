@@ -67,7 +67,8 @@
                 <!-- div.table-responsive -->
 
                 <!-- div.dataTables_borderWrap -->
-                <form action="{{ route('dashboard.crud.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('dashboard.crud-5.store') }}" method="POST" enctype="multipart/form-data">
+
                   @csrf
 
                   <div class="form-group">
@@ -90,7 +91,7 @@
                     <input type="file" name="image" class="form-control" required>
                   </div>
 
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <label for="status">Status</label><br>
 
                     <label>
@@ -100,7 +101,7 @@
                     <label>
                       <input type="radio" name="status" value="inactive"> Inactive
                     </label>
-                  </div>
+                  </div> --}}
 
 
                   <div class="form-actions center">

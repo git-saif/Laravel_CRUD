@@ -85,7 +85,7 @@
 
                       <td>
                         @if($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="Image" width="60" height="60" style="object-fit: cover; border-radius: 5px;">
+                        <img src="{{ asset( $item->image) }}" alt="Image" width="60" height="60" style="object-fit: cover; border-radius: 5px;">
                         @else
                         <span class="text-muted">No Image</span>
                         @endif
