@@ -12,8 +12,8 @@ class Crud5Controller extends Controller
      */
     public function index()
     {
-
-        //
+        $crud5 = Crud5::orderby('id', 'asc')->paginate(3);
+        return view('components.CRUD-5.index', compact('crud5'));
     }
 
     /**
@@ -21,7 +21,7 @@ class Crud5Controller extends Controller
      */
     public function create()
     {
-        //
+        return view('components.CRUD-5.create');
     }
 
     /**
