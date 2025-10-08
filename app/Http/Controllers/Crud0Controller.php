@@ -13,7 +13,7 @@ class Crud0Controller extends Controller
     public function index()
     {
         $crud0 = Crud0::orderby('id', 'asc')->paginate(3);
-        return view('components.crud0.index', compact('crud0'));
+        return view('components.crud-1.index', compact('crud0'));
     }
 
     /**
@@ -21,7 +21,7 @@ class Crud0Controller extends Controller
      */
     public function create()
     {
-        return view('components.crud0.create');
+        return view('components.crud-1.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class Crud0Controller extends Controller
     public function edit(string $id)
     {
         $crud0 = Crud0::findOrFail($id);
-        return view('components.crud0.edit', compact('crud0'));
+        return view('components.crud-1.edit', compact('crud0'));
     }
 
     /**
