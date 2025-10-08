@@ -25,9 +25,9 @@ yarn-error.log
 
 resources/views/components/CRUD-5
 # app/Http/Controllers/Crud5Controller.php
-database/migrations/2025_10_07_175138_create_crud5s_table.php
-app/Models/Crud5.php
-routes/web.php
+# database/migrations/2025_10_07_175138_create_crud5s_table.php
+# app/Models/Crud5.php
+# routes/web.php
 
 clr.bat
 ser.bat
