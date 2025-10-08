@@ -39,7 +39,7 @@ class Crud0Controller extends Controller
             
             Crud0::create($validated);
             
-            return redirect()->route('dashboard.crud-0.index')->with('success', 'Data successfully stored.');
+            return redirect()->route('dashboard.crud-1.index')->with('success', 'Data successfully stored.');
 
 
         } catch (\Throwable $e) {
@@ -80,7 +80,7 @@ class Crud0Controller extends Controller
             ]);
 
             $crud0->update($validated);
-            return redirect()->route('dashboard.crud-0.index')->with('success', 'Data successfully updated.');
+            return redirect()->route('dashboard.crud-1.index')->with('success', 'Data successfully updated.');
 
         } catch (\Throwable $th) {
             //throw $th;
@@ -97,7 +97,7 @@ class Crud0Controller extends Controller
             $crud0->delete();
             
             return redirect()
-            ->route('dashboard.crud-0.index')
+            ->route('dashboard.crud-1.index')
             ->with('success', 'Data successfully deleted.');
 
         } catch (\Throwable $th) {

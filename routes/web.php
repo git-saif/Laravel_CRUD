@@ -40,6 +40,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         'crud-4' => Crud4Controller::class,
         'crud-5' => Crud5Controller::class
 
-
     ]);
 });

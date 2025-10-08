@@ -56,7 +56,7 @@
                                 <h4 class="widget-title " style="color: #fff;">CRUD List</h4>
 
                                 <span class="widget-toolbar">
-                                    <a href="{{ route('dashboard.crud-0.create') }}" style="color: #fff;">
+                                    <a href="{{ route('dashboard.crud-1.create') }}" style="color: #fff;">
                                         <i class="ace-icon fa fa-plus"></i> Create CRUD - 0
                                     </a>
                                 </span>
@@ -112,11 +112,11 @@
                                                         </a>
 
                                                         <a class="green"
-                                                            href="{{ route('dashboard.crud-0.edit', $item->id) }}">
+                                                            href="{{ route('dashboard.crud-1.edit', $item->id) }}">
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>
 
-                                                        <form action="{{ route('dashboard.crud-0.destroy', $item->id) }}"
+                                                        <form action="{{ route('dashboard.crud-1.destroy', $item->id) }}"
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirm('Are you sure you want to delete this item?');">
 

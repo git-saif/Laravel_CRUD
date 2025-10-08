@@ -59,7 +59,7 @@
                                     <h4 class="widget-title" style="color: #fff;">Create Data</h4>
 
                                     <span class="widget-toolbar">
-                                        <a href="{{ route('dashboard.crud.index') }}" style="color: #fff;">
+                                        <a href="{{ route('dashboard.crud-1.index') }}" style="color: #fff;">
                                             <i class="ace-icon fa fa-plus"></i> Go To Index
                                         </a>
                                     </span>
@@ -68,7 +68,7 @@
                                 <!-- div.table-responsive -->
 
                                 <!-- div.dataTables_borderWrap -->
-                                <form action="{{ route('dashboard.crud-0.store') }}" method="POST"
+                                <form action="{{ route('dashboard.crud-1.store') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
 
@@ -111,7 +111,7 @@
                                             <i class="ace-icon fa fa-save bigger-110"></i>
                                         </button>
 
-                                        <a href="{{ route('dashboard.crud-0.index') }}" class="btn btn-sm btn-warning">
+                                        <a href="{{ route('dashboard.crud-1.index') }}" class="btn btn-sm btn-warning">
                                             <i class="ace-icon fa fa-arrow-left bigger-110"></i> Back
                                         </a>
 
