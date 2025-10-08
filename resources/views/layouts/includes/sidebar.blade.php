@@ -60,25 +60,25 @@
 
             <ul class="submenu">
                 <li class="{{ $currentRoute == 'dashboard.crud-0.index' ? 'active' : '' }}">
-                    <a href="{{ route('dashboard.crud-0.index') }}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        CRUD 
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-
-                <li class="{{ $currentRoute == 'dashboard.crud.index' ? 'active' : '' }}">
-                    <a href="{{ route('dashboard.crud.index') }}">
+                    <a href="{{ route('dashboard.crud-1.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 1
                     </a>
                     <b class="arrow"></b>
                 </li>
 
-                <li class="{{ $currentRoute == 'dashboard.crud-2.index' ? 'active' : '' }}">
+                <li class="{{ $currentRoute == 'dashboard.crud.index' ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud-2.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 2
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="{{ $currentRoute == 'dashboard.crud-2.index' ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.crud-3.index') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        CRUD - 3
                     </a>
                     <b class="arrow"></b>
                 </li>
@@ -88,6 +88,15 @@
                     <a href="{{ route('dashboard.crud-4.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 4
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+                {{-- CRUD 5 --}}
+                <li class="{{ $currentRoute == 'dashboard.crud-5.index' ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.crud-5.index') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        CRUD - 5
                     </a>
                     <b class="arrow"></b>
                 </li>
