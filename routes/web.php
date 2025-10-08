@@ -5,6 +5,7 @@ use App\Http\Controllers\CrudController;
 use App\Http\Controllers\Crud0Controller;
 use App\Http\Controllers\Crud2Controller;
 use App\Http\Controllers\Crud4Controller;
+use App\Http\Controllers\Crud5Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
         // CRUD With Advance Validation -> app/Http/Requests/FolderName/RequestName.php
         'crud-4' => Crud4Controller::class,
-        // 'crud-5' => Crud5Controller::class,
 
 
     ]);
