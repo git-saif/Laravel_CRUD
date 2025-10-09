@@ -180,9 +180,10 @@ class Crud3Controller extends Controller
         try {
             $crud3 = Crud3::findOrFail($id);
 
-            // যদি একাধিক ছবি থাকে
-            if ($crud3->image && is_array($crud3->image)) {
-                foreach ($crud3->image as $imagePath) {
+            if ($crud3->image) {
+                $images = json_decode($crud3->image, true) ?? [];
+                foreach ($images as $imagePath) {
+                    $imagePath = ltrim($imagePath, '/');
                     if (file_exists(public_path($imagePath))) {
                         unlink(public_path($imagePath));
                     }
@@ -195,28 +196,4 @@ class Crud3Controller extends Controller
             return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
     }
-
-
-
-    // public function destroy(string $id)
-    // {
-    //     try {
-    //         $crud3 = Crud3::findOrFail($id);
-
-    //         if ($crud3->image) {
-    //             $images = json_decode($crud3->image, true) ?? [];
-    //             foreach ($images as $imagePath) {
-    //                 $imagePath = ltrim($imagePath, '/');
-    //                 if (file_exists(public_path($imagePath))) {
-    //                     unlink(public_path($imagePath));
-    //                 }
-    //             }
-    //         }
-
-    //         $crud3->delete();
-    //         return redirect()->route('dashboard.crud-3.index')->with('success', 'Data deleted successfully!');
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
-    //     }
-    // }
 }
