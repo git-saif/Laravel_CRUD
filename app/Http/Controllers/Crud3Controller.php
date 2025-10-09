@@ -45,8 +45,8 @@ class Crud3Controller extends Controller
                 foreach ($request->file('image') as $image) {
                     if ($image->isValid()) {
                         $imgName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                        $image->move(public_path('uploads/images/crud2'), $imgName);
-                        $image_paths[] = 'uploads/images/crud2/' . $imgName;
+                        $image->move(public_path('uploads/images/crud3'), $imgName);
+                        $image_paths[] = 'uploads/images/crud3/' . $imgName;
                     }
                 }
             }
@@ -54,6 +54,8 @@ class Crud3Controller extends Controller
             // কমপক্ষে ১টি ইমেজ আপলোড হয়েছে কিনা চেক করুন
             if (empty($image_paths)) {
                 return redirect()->back()->with('error', 'At least one valid image is required.');
+
+                dd($image_paths);
             }
 
             Crud3::create([
@@ -131,14 +133,14 @@ class Crud3Controller extends Controller
                 if ($request->hasFile("replace_images.{$index}")) {
                     $newImage = $request->file("replace_images.{$index}");
                     $imgName = time() . '_' . $index . '_' . uniqid() . '.' . $newImage->getClientOriginalExtension();
-                    $newImage->move(public_path('uploads/images/crud2'), $imgName);
+                    $newImage->move(public_path('uploads/images/crud3'), $imgName);
 
                     // Delete old image
                     if (file_exists(public_path($existingImage))) {
                         unlink(public_path($existingImage));
                     }
 
-                    $updatedImages[] = 'uploads/images/crud2/' . $imgName;
+                    $updatedImages[] = 'uploads/images/crud3/' . $imgName;
                 } else {
                     $updatedImages[] = $existingImage;
                 }
@@ -149,8 +151,8 @@ class Crud3Controller extends Controller
                 foreach ($request->file('new_images') as $newImage) {
                     if ($newImage->isValid()) {
                         $imgName = time() . '_n_' . uniqid() . '.' . $newImage->getClientOriginalExtension();
-                        $newImage->move(public_path('uploads/images/crud2'), $imgName);
-                        $updatedImages[] = 'uploads/images/crud2/' . $imgName;
+                        $newImage->move(public_path('uploads/images/crud3'), $imgName);
+                        $updatedImages[] = 'uploads/images/crud3/' . $imgName;
                     }
                 }
             }
@@ -193,4 +195,28 @@ class Crud3Controller extends Controller
             return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
     }
+
+
+
+    // public function destroy(string $id)
+    // {
+    //     try {
+    //         $crud3 = Crud3::findOrFail($id);
+
+    //         if ($crud3->image) {
+    //             $images = json_decode($crud3->image, true) ?? [];
+    //             foreach ($images as $imagePath) {
+    //                 $imagePath = ltrim($imagePath, '/');
+    //                 if (file_exists(public_path($imagePath))) {
+    //                     unlink(public_path($imagePath));
+    //                 }
+    //             }
+    //         }
+
+    //         $crud3->delete();
+    //         return redirect()->route('dashboard.crud-3.index')->with('success', 'Data deleted successfully!');
+    //     } catch (\Exception $e) {
+    //         return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
+    //     }
+    // }
 }
