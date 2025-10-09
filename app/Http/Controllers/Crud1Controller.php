@@ -61,7 +61,7 @@ class Crud1Controller extends Controller
     public function edit(string $id)
     {
         $crud1 = Crud1::findOrFail($id);
-        return view('components.crud-1.edit', compact('Crud1'));
+        return view('components.crud-1.edit', compact('crud1'));
     }
 
     /**

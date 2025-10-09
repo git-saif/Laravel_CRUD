@@ -39,7 +39,7 @@
                                 </div>
 
                                 <!-- Edit Form Start -->
-                                <form action="{{ route('dashboard.crud-1.update', $crud0->id) }}" method="POST"
+                                <form action="{{ route('dashboard.crud-1.update', $crud1->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -47,21 +47,21 @@
                                     <div class="form-group">
                                         <label for="name">Topic Name:</label>
                                         <input type="text" name="topic_name" class="form-control"
-                                            value="{{ old('topic_name', $crud0->topic_name) }}" required>
+                                            value="{{ old('topic_name', $crud1->topic_name) }}" required>
                                     </div>
 
                                     
                                     <div class="form-group">
                                         <label for="name">Title</label>
                                         <input type="text" name="title" class="form-control"
-                                            value="{{ old('title', $crud0->title) }}" required>
+                                            value="{{ old('title', $crud1->title) }}" required>
                                     </div>
 
                                     
                                     <div class="form-group">
                                         <label for="name">Description</label>
                                         <input type="text" name="description" class="form-control"
-                                            value="{{ old('description', $crud0->description) }}" required>
+                                            value="{{ old('description', $crud1->description) }}" required>
                                     </div>
 
                                     
@@ -71,12 +71,12 @@
 
                                         <label>
                                             <input type="radio" name="status" value="active"
-                                                {{ $crud0->status == 'active' ? 'checked' : '' }}> Active
+                                                {{ $crud1->status == 'active' ? 'checked' : '' }}> Active
                                         </label>
                                         {{-- &nbsp;&nbsp; --}}
                                         <label>
                                             <input type="radio" name="status" value="inactive"
-                                                {{ $crud0->status == 'inactive' ? 'checked' : '' }}> Inactive
+                                                {{ $crud1->status == 'inactive' ? 'checked' : '' }}> Inactive
                                         </label>
                                     </div>
 
