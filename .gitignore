@@ -31,10 +31,10 @@ yarn-error.log
 # routes/web.php
 
 
-app/Http/Controllers/Crud3Controller.php
-database/migrations/2025_04_22_153012_create_crud3s_table.php
-app/Models/Crud3.php
-app/Models/Crud3.php
+# app/Http/Controllers/Crud3Controller.php
+# database/migrations/2025_04_22_153012_create_crud3s_table.php
+# app/Models/Crud3.php
+# app/Models/Crud3.php
 
 
 
