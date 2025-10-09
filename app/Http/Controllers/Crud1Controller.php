@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Crud0;
+use App\Models\Crud1;
 use Illuminate\Http\Request;
 
-class Crud0Controller extends Controller
+class Crud1Controller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $crud0 = Crud0::orderby('id', 'asc')->paginate(3);
-        return view('components.crud-1.index', compact('crud0'));
+        $crud1 = Crud1::orderby('id', 'asc')->paginate(3);
+        return view('components.crud-1.index', compact('crud1'));
     }
 
     /**
@@ -37,7 +37,7 @@ class Crud0Controller extends Controller
                 'status' => 'required',
             ]);
             
-            Crud0::create($validated);
+            Crud1::create($validated);
             
             return redirect()->route('dashboard.crud-1.index')->with('success', 'Data successfully stored.');
 
@@ -60,8 +60,8 @@ class Crud0Controller extends Controller
      */
     public function edit(string $id)
     {
-        $crud0 = Crud0::findOrFail($id);
-        return view('components.crud-1.edit', compact('crud0'));
+        $crud1 = Crud1::findOrFail($id);
+        return view('components.crud-1.edit', compact('Crud1'));
     }
 
     /**
@@ -69,7 +69,7 @@ class Crud0Controller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $crud0 = Crud0::findOrFail($id);
+        $crud1 = Crud1::findOrFail($id);
         
         try {
             $validated = $request->validate([
@@ -79,7 +79,7 @@ class Crud0Controller extends Controller
                 'status' => 'required',
             ]);
 
-            $crud0->update($validated);
+            $crud1->update($validated);
             return redirect()->route('dashboard.crud-1.index')->with('success', 'Data successfully updated.');
 
         } catch (\Throwable $th) {
@@ -93,8 +93,8 @@ class Crud0Controller extends Controller
     public function destroy(string $id)
     {
         try {
-            $crud0 = Crud0::findOrFail($id);
-            $crud0->delete();
+            $crud1 = Crud1::findOrFail($id);
+            $crud1->delete();
             
             return redirect()
             ->route('dashboard.crud-1.index')

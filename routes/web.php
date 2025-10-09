@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrudController;
-use App\Http\Controllers\Crud0Controller;
+// use App\Http\Controllers\Crud0Controller;
+use App\Http\Controllers\Crud1Controller;
 use App\Http\Controllers\Crud2Controller;
 use App\Http\Controllers\Crud4Controller;
 use App\Http\Controllers\Crud5Controller;
@@ -32,7 +33,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
     Route::resources([
 
-        'crud-1' => Crud0Controller::class,
+        'crud-1' => Crud1Controller::class,
         'crud-2' => CrudController::class,
         'crud-3' => Crud2Controller::class,
 

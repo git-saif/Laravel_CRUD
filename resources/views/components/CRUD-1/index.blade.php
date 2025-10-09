@@ -83,13 +83,13 @@
                                     <tbody>
 
                                         @php
-                                            $sl = $crud0->firstItem() ?? 0;
+                                            $sl = $crud1->firstItem() ?? 0;
                                         @endphp
 
 
                                         {{-- @forelse ($posts as $post) --}}
 
-                                        @forelse ($crud0 as  $item)
+                                        @forelse ($crud1 as  $item)
                                             <tr>
                                                 <td style="font-weight: bold;"> {{ $sl++ }}. </td>
                                                 <td> {{ $item->topic_name ?? '' }} </td>
@@ -140,7 +140,7 @@
                                 </table>
 
                                 <div class="text-center">
-                                    {{ $crud0->links('pagination::bootstrap-4') }}
+                                    {{ $crud1->links('pagination::bootstrap-4') }}
                                 </div>
 
 
