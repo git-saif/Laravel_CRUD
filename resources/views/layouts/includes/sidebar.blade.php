@@ -59,7 +59,7 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-                <li class="{{ $currentRoute == 'dashboard.crud-0.index' ? 'active' : '' }}">
+                <li class="{{ Str::startsWith($currentRoute, 'dashboard.crud-1') ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud-1.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 1
@@ -67,7 +67,7 @@
                     <b class="arrow"></b>
                 </li>
 
-                <li class="{{ $currentRoute == 'dashboard.crud-2.index' ? 'active' : '' }}">
+                <li class="{{ Str::startsWith($currentRoute, 'dashboard.crud-2') ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud-2.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 2
@@ -75,7 +75,7 @@
                     <b class="arrow"></b>
                 </li>
 
-                <li class="{{ $currentRoute == 'dashboard.crud-3.index' ? 'active' : '' }}">
+                <li class="{{ Str::startsWith($currentRoute, 'dashboard.crud-3') ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud-3.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 3
@@ -84,7 +84,7 @@
                 </li>
 
                 {{-- CRUD 4 --}}
-                <li class="{{ $currentRoute == 'dashboard.crud-4.index' ? 'active' : '' }}">
+                <li class="{{ Str::startsWith($currentRoute, 'dashboard.crud-4')  ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud-4.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 4
@@ -93,7 +93,7 @@
                 </li>
 
                 {{-- CRUD 5 --}}
-                <li class="{{ $currentRoute == 'dashboard.crud-5.index' ? 'active' : '' }}">
+                <li class="{{ Str::startsWith($currentRoute, 'dashboard.crud-5')  ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud-5.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 5
