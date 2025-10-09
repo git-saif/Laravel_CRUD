@@ -79,7 +79,7 @@ class Crud5Controller extends Controller
     {
         $crud5 = Crud5::findOrFail($id);
 
-        try{
+        try {
             $validated = $request->validated();
 
             $img_path = $crud5->image;
@@ -91,7 +91,7 @@ class Crud5Controller extends Controller
                 $filename = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/images/crud5'), $filename);
                 $img_path = 'uploads/images/crud5/' . $filename;
-        }
+            }
 
             $crud5->update([
                 'name'  => $validated['name'],
@@ -119,6 +119,7 @@ class Crud5Controller extends Controller
             }
 
             $crud5->delete();
+            
             return redirect()->route('dashboard.crud-5.index')->with('success', 'Data deleted successfully!');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Something went wrong: ' . $th->getMessage());

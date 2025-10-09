@@ -110,7 +110,7 @@
                       <i class="ace-icon fa fa-save bigger-110"></i>
                     </button>
 
-                    <a href="{{ route('dashboard.crud.index') }}" class="btn btn-sm btn-warning">
+                    <a href="{{ route('dashboard.crud-5.index') }}" class="btn btn-sm btn-warning">
                       <i class="ace-icon fa fa-arrow-left bigger-110"></i> Back
                     </a>
 
