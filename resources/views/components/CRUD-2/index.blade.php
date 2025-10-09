@@ -52,18 +52,16 @@
                             <div class="clearfix">
                                 <div class="pull-right tableTools-container"></div>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center ">
-                                <div class="widget-header widget-header-flat" style="background-color: #618f8f;">
-                                    <h4 class="widget-title " style="color: #fff;">CRUD List</h4>
+                            <div class="widget-header widget-header-flat" style="background-color: #618f8f;">
+                                <h4 class="widget-title " style="color: #fff;">CRUD List</h4>
 
-                                    <span class="widget-toolbar">
-                                        <a href="{{ route('dashboard.crud-2.create') }}" style="color: #fff;">
-                                            <i class="ace-icon fa fa-plus"></i> Create Position
-                                        </a>
-                                    </span>
-                                </div>
-
+                                <span class="widget-toolbar">
+                                    <a href="{{ route('dashboard.crud-2.create') }}" style="color: #fff;">
+                                        <i class="ace-icon fa fa-plus"></i> Create Position
+                                    </a>
+                                </span>
                             </div>
+
 
                             <!-- div.table-responsive -->
 
@@ -89,38 +87,31 @@
                                             $sl = $crud2->firstItem() ?? 0;
                                         @endphp
 
-                                        @forelse ($crud2 as $crud)
+
+
+                                        @forelse ($crud2 as  $item)
                                             <tr>
                                                 <td style="font-weight: bold;"> {{ $sl++ }}. </td>
-                                                <td> {{ $crud->name }} </td>
-                                                <td> {{ $crud->phone }} </td>
-                                                <td> {{ $crud->email }} </td>
-                                                {{-- <td>
-                                                    @if ($crud->image && is_array($crud->image))
-                                                        @foreach ($crud->image as $img)
-                                                            <img src="{{ asset($img) }}" width="100" class="mb-1"
-                                                                alt="">
-                                                        @endforeach
-                                                    @else
-                                                        <span>No image</span>
-                                                    @endif
-                                                </td> --}}
-
+                                                <td> {{ $item->name }} </td>
+                                                <td> {{ $item->phone }} </td>
+                                                <td> {{ $item->email }} </td>
+                                                
                                                 <td>
-                                                    @if ($crud->image)
-                                                        @foreach ($crud->image as $img)
-                                                            <img src="{{ asset($img) }}" width="100" height="60" class="mb-1"
-                                                                alt="">
-                                                        @endforeach
+                                                    
+                                                    {{-- {{ dd($item->image) }} --}}
+
+                                                    @if($item->image)
+                                                    <img src="{{ asset( $item->image) }}" alt="Image" width="60" height="60" style="object-fit: cover; border-radius: 5px;">
                                                     @else
-                                                        <span>No image</span>
+                                                    <span class="text-muted">No Image</span>
+
                                                     @endif
+
                                                 </td>
 
 
-
                                                 <td>
-                                                    @if ($crud->status == 'active')
+                                                    @if ($item->status == 'active')
                                                         <span
                                                             class="label label-sm label-success arrowed-in">Active</span>
                                                     @else
@@ -128,7 +119,6 @@
                                                             class="label label-sm label-danger arrowed-in">Inactive</span>
                                                     @endif
                                                 </td>
-
                                                 <td>
                                                     <div class="hidden-sm hidden-xs action-buttons">
                                                         <a class="blue" href="#">
@@ -136,12 +126,11 @@
                                                         </a>
 
                                                         <a class="green"
-                                                            href="{{ route('dashboard.crud-2.edit', $crud->id) }}">
+                                                            href="{{ route('dashboard.crud-2.edit', $item->id) }}">
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>
 
-                                                        <form
-                                                            action="{{ route('dashboard.crud-2.destroy', $crud->id) }}"
+                                                        <form action="{{ route('dashboard.crud-2.destroy', $item->id) }}"
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirm('Are you sure you want to delete this item?');">
 
@@ -167,6 +156,7 @@
                                 <div class="text-center">
                                     {{ $crud2->links('pagination::bootstrap-4') }}
                                 </div>
+
 
                             </div>
                         </div>

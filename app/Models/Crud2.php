@@ -10,11 +10,5 @@ class Crud2 extends Model
     use HasFactory;
 
     protected $guarded = [];
-
-
-    // Accessor for image field
-    public function getImageAttribute($value)
-    {
-        return json_decode($value, true); // Always return array
-    }
+    
 }

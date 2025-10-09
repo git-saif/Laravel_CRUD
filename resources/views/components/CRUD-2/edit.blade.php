@@ -2,7 +2,7 @@
 
 @section('content')
 @section('title', 'Smart ERP - Edit Entry')
-
+<!-- Edit form -->
 <div class="main-content">
     <div class="main-content-inner">
         <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -24,129 +24,81 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 ">
                             <div class="col-md-2"></div>
 
                             <div class="col-md-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="table-header d-flex justify-content-between align-items-stretch">
-                                        <span>Edit Entry</span>
-                                        <a href="{{ route('dashboard.crud-2.index') }}"
-                                            class="pull-right btn btn-sm btn-white h-100 d-flex align-items-center"
-                                            style="margin-left: auto;">
-                                            <i class="fa fa-list me-1"></i> Back to List
+                                <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
+                                    <h4 class="widget-title" style="color: #fff;">Edit Data</h4>
+
+                                    <span class="widget-toolbar">
+                                        <a href="{{ route('dashboard.crud-2.index') }}" style="color: #fff;">
+                                            <i class="ace-icon fa fa-list"></i> Back to List
                                         </a>
-                                    </div>
+                                    </span>
                                 </div>
 
                                 <!-- Edit Form Start -->
-                                <form action="{{ route('dashboard.crud-2.update', $crud2->id) }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('dashboard.crud-2.update', $crud2->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" name="name" class="form-control"
-                                            value="{{ $crud2->name }}" required>
+                                            value="{{ old('name', $crud2->name) }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="phone">Phone No</label>
                                         <input type="text" name="phone" class="form-control"
-                                            value="{{ $crud2->phone }}" required>
+                                            value="{{ old('phone', $crud2->phone) }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" class="form-control"
-                                            value="{{ $crud2->email }}" required>
+                                            value="{{ old('email', $crud2->email) }}" required>
                                     </div>
 
-                                    <!-- Current Images Section -->
                                     <div class="form-group">
-                                        <label>Current Images</label><br>
-                                        @php
-                                            $existingImages = is_array($crud2->image)
-                                                ? $crud2->image
-                                                : json_decode($crud2->image, true) ?? [];
-                                        @endphp
-
-                                        @if (count($existingImages) > 0)
-                                            <div class="row mb-3">
-                                                @foreach ($existingImages as $index => $image)
-                                                    <div class="col-md-4 mb-3">
-                                                        <div class="card">
-                                                            <img src="{{ asset($image) }}" class="card-img-top"
-                                                                style="height: 150px; object-fit: cover;">
-                                                            <div class="card-body p-2">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="delete_images[]"
-                                                                        value="{{ $image }}"
-                                                                        id="delete_img_{{ $index }}">
-                                                                    <label class="form-check-label"
-                                                                        for="delete_img_{{ $index }}">
-                                                                        Delete
-                                                                    </label>
-                                                                </div>
-                                                                <div class="mt-2">
-                                                                    <label class="btn btn-sm btn-outline-primary w-100">
-                                                                        Change Image
-                                                                        <input type="file"
-                                                                            name="replace_images[{{ $index }}]"
-                                                                            class="d-none replace-image"
-                                                                            data-index="{{ $index }}">
-                                                                    </label>
-                                                                </div>
-                                                                <input type="hidden" name="existing_images[]"
-                                                                    value="{{ $image }}">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
+                                        <label for="image">Current Image</label><br>
+                                        @if ($crud2->image)
+                                            {{-- <img src="{{ asset('uploads/'.$crud2->image) }}" alt="Current Image" width="100"> --}}
+                                            <img src="{{ asset($crud2->image) }}" alt="Current Image" width="100">
                                         @else
-                                            <p>No images uploaded.</p>
+                                            <p>No image uploaded.</p>
                                         @endif
                                     </div>
 
-                                    <!-- New Images Section -->
                                     <div class="form-group">
-                                        <label>Add New Images</label>
-                                        <div id="new-images-container">
-                                            <div class="input-group mb-2">
-                                                <input type="file" name="new_images[]" class="form-control">
-                                                <button type="button" class="btn btn-danger remove-new-image">× Remove
-                                                    Field</button>
-                                            </div>
-                                        </div>
-                                        <button type="button" id="add-new-image" class="btn btn-sm btn-primary mt-2">
-                                            <i class="fa fa-plus"></i> Add More Images
-                                        </button>
+                                        <label for="image">Change Image (optional)</label>
+                                        <input type="file" name="image" class="form-control">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="status">Status</label><br>
+
                                         <label>
                                             <input type="radio" name="status" value="active"
                                                 {{ $crud2->status == 'active' ? 'checked' : '' }}> Active
                                         </label>
+                                        {{-- &nbsp;&nbsp; --}}
                                         <label>
                                             <input type="radio" name="status" value="inactive"
                                                 {{ $crud2->status == 'inactive' ? 'checked' : '' }}> Inactive
                                         </label>
                                     </div>
 
+
                                     <div class="form-actions center">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="ace-icon fa fa-save bigger-110"></i>
+                                        <button type="submit" class="btn btn-sm btn-success">
                                             Update
+                                            <i class="ace-icon fa fa-check icon-on-right bigger-110"></i>
                                         </button>
 
-                                        <a href="{{ route('dashboard.crud.index') }}" class="btn btn-warning">
-                                            <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                                            Back
+                                        <a href="{{ route('dashboard.crud-2.index') }}" class="btn btn-sm btn-warning">
+                                            <i class="ace-icon fa fa-arrow-left bigger-110"></i> Back
                                         </a>
                                     </div>
                                 </form>
@@ -155,42 +107,11 @@
                             <div class="col-md-2"></div>
                         </div>
                     </div>
-                </div>
+                </div><!-- /.col -->
             </div>
-        </div>
+        </div><!-- /.page-content -->
     </div>
 </div>
+<!-- /.main-content -->
 
 @endsection
-
-@push('scripts')
-<script>
-    // Add new image field
-    $('#add-new-image').click(function() {
-        $('#new-images-container').append(`
-            <div class="input-group mb-2">
-                <input type="file" name="new_images[]" class="form-control">
-                <button type="button" class="btn btn-danger remove-new-image">× Remove Field</button>
-            </div>
-        `);
-    });
-
-    // Remove new image field
-    $(document).on('click', '.remove-new-image', function() {
-        $(this).closest('.input-group').remove();
-    });
-
-    // Preview image when replacing
-    $(document).on('change', '.replace-image', function(e) {
-        const index = $(this).data('index');
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                $(`#delete_img_${index}`).closest('.card').find('img').attr('src', event.target.result);
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
-@endpush

@@ -34,8 +34,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::resources([
 
         'crud-1' => Crud1Controller::class,
-        'crud-2' => CrudController::class,
-        'crud-3' => Crud2Controller::class,
+        'crud-2' => Crud2Controller::class,
+        // 'crud-3' => Crud2Controller::class,
 
         // CRUD With Advance Validation -> app/Http/Requests/FolderName/RequestName.php
         'crud-4' => Crud4Controller::class,

@@ -30,5 +30,20 @@ resources/views/components/CRUD-5/edit.blade.php
 # app/Models/Crud5.php
 # routes/web.php
 
+
+app/Http/Controllers/Crud3Controller.php
+database/migrations/2025_04_22_153012_create_crud3s_table.php
+app/Models/Crud3.php
+app/Models/Crud3.php
+
+
+
+resources/views/components/CRUD-200
+
+resources/views/components/CRUD-5/
+resources/views/components/CRUD-5/create.blade.php
+resources/views/components/CRUD-5/edit.blade.php
+# resources\views\components\CRUD-5
+
 clr.bat
 ser.bat

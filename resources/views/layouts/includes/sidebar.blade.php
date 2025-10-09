@@ -67,7 +67,7 @@
                     <b class="arrow"></b>
                 </li>
 
-                <li class="{{ $currentRoute == 'dashboard.crud.index' ? 'active' : '' }}">
+                <li class="{{ $currentRoute == 'dashboard.crud-2.index' ? 'active' : '' }}">
                     <a href="{{ route('dashboard.crud-2.index') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 2
@@ -76,7 +76,7 @@
                 </li>
 
                 <li class="{{ $currentRoute == 'dashboard.crud-2.index' ? 'active' : '' }}">
-                    <a href="{{ route('dashboard.crud-3.index') }}">
+                    {{-- <a href="{{ route('dashboard.crud-3.index') }}"> --}}
                         <i class="menu-icon fa fa-caret-right"></i>
                         CRUD - 3
                     </a>

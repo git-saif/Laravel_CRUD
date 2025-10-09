@@ -55,24 +55,21 @@
                                 <div class="clearfix">
                                     <div class="pull-right tableTools-container"></div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center ">
-                                    <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
-                                        <h4 class="widget-title" style="color: #fff;">Create Data</h4>
+                                <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
+                                    <h4 class="widget-title" style="color: #fff;">Create Data</h4>
 
-                                        <span class="widget-toolbar">
-                                            <a href="{{ route('dashboard.crud-2.index') }}" style="color: #fff;">
-                                                <i class="ace-icon fa fa-plus"></i> Go To Index
-                                            </a>
-                                        </span>
-                                    </div>
-
+                                    <span class="widget-toolbar">
+                                        <a href="{{ route('dashboard.crud-2.index') }}" style="color: #fff;">
+                                            <i class="ace-icon fa fa-plus"></i> Go To Index
+                                        </a>
+                                    </span>
                                 </div>
 
                                 <!-- div.table-responsive -->
 
                                 <!-- div.dataTables_borderWrap -->
-                                <form action="{{ route('dashboard.crud-2.store') }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('dashboard.crud-2.store') }}" method="POST" enctype="multipart/form-data" class="form-horizontal" role="form">
+
                                     @csrf
 
                                     <div class="form-group">
@@ -83,7 +80,7 @@
 
                                     <div class="form-group">
                                         <label for="phone">Phone No</label>
-                                        <input type="text" name="phone" class="form-control"
+                                        <input type="number" name="phone" class="form-control"
                                             placeholder="+8801XXXXXXXXX" required>
                                     </div>
 
@@ -93,18 +90,10 @@
                                             placeholder="example@email.com" required>
                                     </div>
 
-                                    {{-- Multiple Image Start --}}
-                                    <div id="image-upload-wrapper">
-                                        <div class="form-group">
-                                            <label for="image">Image (required)</label>
-                                            <input type="file" name="image[]" class="form-control" required>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="image">Image</label>
+                                        <input type="file" name="image" class="form-control" required>
                                     </div>
-
-                                    <button type="button" id="add-image" class="btn btn-info">+ Add Another
-                                        Image</button>
-
-                                    {{-- Multiple Image End --}}
 
                                     <div class="form-group">
                                         <label for="status">Status</label><br>
@@ -118,16 +107,17 @@
                                         </label>
                                     </div>
 
+
                                     <div class="form-actions center">
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="ace-icon fa fa-check bigger-110"></i>
-                                            Submit
+                                        <button type="submit" class="btn btn-sm btn-success">
+                                            Save
+                                            <i class="ace-icon fa fa-save bigger-110"></i>
                                         </button>
 
-                                        <a href="{{ route('dashboard.crud.index') }}" class="btn btn-warning">
-                                            <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                                            Back
+                                        <a href="{{ route('dashboard.crud-2.index') }}" class="btn btn-sm btn-warning">
+                                            <i class="ace-icon fa fa-arrow-left bigger-110"></i> Back
                                         </a>
+
                                     </div>
                                 </form>
                                 {{-- ফর্ম শেষ --}}
@@ -144,30 +134,6 @@
 </div>
 <!-- /.main-content -->
 
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-
 
 
 @endsection
-
-@push('scripts')
-<script>
-    document.getElementById('add-image').addEventListener('click', function() {
-        let newInput = document.createElement('div');
-        newInput.classList.add('form-group', 'mt-2');
-        newInput.innerHTML = `<input type="file" name="image[]" class="form-control">`;
-        document.getElementById('image-upload-wrapper').appendChild(newInput);
-    });
-</script>
-@endpush
