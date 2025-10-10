@@ -39,7 +39,7 @@
                                   <h4 class="widget-title" style="color: #fff;">Edit Data</h4>
 
                                   <span class="widget-toolbar">
-                                    <a href="{{ route('dashboard.crud-3.index') }}" style="color: #fff;">
+                                    <a href="{{ route('dashboard.crud-6.index') }}" style="color: #fff;">
                                       <i class="ace-icon fa fa-list"></i> Back to List
                                     </a>
                                   </span>
@@ -47,7 +47,7 @@
 
 
                                 <!-- Edit Form Start -->
-                                <form action="{{ route('dashboard.crud-3.update', $crud3->id) }}" method="POST"
+                                <form action="{{ route('dashboard.crud-6.update', $crud6->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -55,28 +55,28 @@
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" name="name" class="form-control"
-                                            value="{{ $crud3->name }}" required>
+                                            value="{{ $crud6->name }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="phone">Phone No</label>
                                         <input type="text" name="phone" class="form-control"
-                                            value="{{ $crud3->phone }}" required>
+                                            value="{{ $crud6->phone }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" class="form-control"
-                                            value="{{ $crud3->email }}" required>
+                                            value="{{ $crud6->email }}" required>
                                     </div>
 
                                     <!-- Current Images Section -->
                                     <div class="form-group">
                                         <label>Current Images</label><br>
                                         @php
-                                            $existingImages = is_array($crud3->image)
-                                                ? $crud3->image
-                                                : json_decode($crud3->image, true) ?? [];
+                                            $existingImages = is_array($crud6->image)
+                                                ? $crud6->image
+                                                : json_decode($crud6->image, true) ?? [];
                                         @endphp
 
                                         @if (count($existingImages) > 0)
@@ -137,11 +137,11 @@
                                         <label for="status">Status</label><br>
                                         <label>
                                             <input type="radio" name="status" value="active"
-                                                {{ $crud3->status == 'active' ? 'checked' : '' }}> Active
+                                                {{ $crud6->status == 'active' ? 'checked' : '' }}> Active
                                         </label>
                                         <label>
                                             <input type="radio" name="status" value="inactive"
-                                                {{ $crud3->status == 'inactive' ? 'checked' : '' }}> Inactive
+                                                {{ $crud6->status == 'inactive' ? 'checked' : '' }}> Inactive
                                         </label>
                                     </div>
 
@@ -151,7 +151,7 @@
                                         <i class="ace-icon fa fa-check icon-on-right bigger-110"></i>
                                       </button>
 
-                                      <a href="{{ route('dashboard.crud-3.index') }}" class="btn btn-sm btn-warning">
+                                      <a href="{{ route('dashboard.crud-6.index') }}" class="btn btn-sm btn-warning">
                                         <i class="ace-icon fa fa-arrow-left bigger-110"></i> Back
                                       </a>
                                     </div>
