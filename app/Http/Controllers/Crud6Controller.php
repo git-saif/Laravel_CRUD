@@ -30,30 +30,25 @@ class Crud6Controller extends Controller
      */
     public function store(Crud6Request $request)
     {
-        try {
-            $image_paths = [];
+        $imagePaths = [];
 
-            if ($request->hasFile('image')) {
-                foreach ($request->file('image') as $image) {
-                    if ($image->isValid()) {
-                        $imgName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                        $image->move(public_path('uploads/images/crud6'), $imgName);
-                        $image_paths[] = 'uploads/images/crud6/' . $imgName;
-                    }
-                }
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
+                $imgName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/images/crud6'), $imgName);
+                $imagePaths[] = 'uploads/images/crud6/' . $imgName;
             }
-
-            Crud6::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'image' => json_encode($image_paths),
-            ]);
-
-            return redirect()->route('dashboard.crud-6.index')->with('success', 'Data saved successfully!');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
+
+        Crud6::create([
+            'name'   => $request->name,
+            'email'  => $request->email,
+            'phone'  => $request->phone,
+            'image'  => json_encode($imagePaths),
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('dashboard.crud-6.index')->with('success', 'Data saved successfully!');
     }
 
     /**
@@ -119,6 +114,7 @@ class Crud6Controller extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'image' => json_encode($updatedImages),
+                'status' => $request->status
             ]);
 
             return redirect()->route('dashboard.crud-6.index')->with('success', 'Data updated successfully!');

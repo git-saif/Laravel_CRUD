@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->json('image');    // For Accept Multiple Image
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

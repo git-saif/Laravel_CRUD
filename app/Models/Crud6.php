@@ -14,6 +14,7 @@ class Crud6 extends Model
         'email',
         'phone',
         'image',
+        'status',
     ];
 
     // Image field accessor (always return array)

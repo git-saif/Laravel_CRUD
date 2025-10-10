@@ -37,11 +37,12 @@ class Crud6Request extends FormRequest
     protected function storeRules(): array
     {
         return [
-            'name'  => 'required|string|max:255',
-            'email' => 'required|email|unique:crud6s,email',
-            'phone' => 'required|string|max:20|unique:crud6s,phone',
-            'image' => 'required|array|min:1',
+            'name'   => 'required|string|max:255',
+            'email'  => 'required|email|unique:crud6s,email',
+            'phone'  => 'required|string|max:20|unique:crud6s,phone',
+            'image'  => 'required|array|min:1',
             'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required|in:active,inactive',
         ];
     }
 
@@ -54,15 +55,18 @@ class Crud6Request extends FormRequest
         $id = $crud6?->id ?? $crud6;
 
         return [
-            'name'  => 'required|string|max:255',
-            'email' => ['required', 'email', Rule::unique('crud6s', 'email')->ignore($id)],
-            'phone' => ['required', 'string', 'max:20', Rule::unique('crud6s', 'phone')->ignore($id)],
+            'name'   => 'required|string|max:255',
+            'email'  => ['required', 'email', Rule::unique('crud6s', 'email')->ignore($id)],
+            'phone'  => ['required', 'string', 'max:20', Rule::unique('crud6s', 'phone')->ignore($id)],
             'existing_images' => 'sometimes|array',
+            'existing_images.*' => 'sometimes|string',
             'delete_images' => 'sometimes|array',
+            'delete_images.*' => 'sometimes|string',
             'replace_images' => 'sometimes|array',
             'replace_images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
             'new_images' => 'sometimes|array',
             'new_images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required|in:active,inactive',
         ];
     }
 
@@ -72,16 +76,15 @@ class Crud6Request extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'  => 'Please enter a name.',
+            'name.required' => 'Please enter a name.',
             'email.required' => 'Email is required.',
-            'email.email'    => 'Please enter a valid email address.',
-            'email.unique'   => 'This email already exists.',
+            'email.unique' => 'This email already exists.',
             'phone.required' => 'Phone number is required.',
-            'phone.unique'   => 'This phone number already exists.',
+            'phone.unique' => 'This phone number already exists.',
             'image.required' => 'Please upload at least one image.',
-            'image.*.image'  => 'Each file must be an image.',
-            'image.*.mimes'  => 'Images must be jpeg, png, jpg, or gif format.',
-            'image.*.max'    => 'Each image must not exceed 2MB.',
+            'image.*.image' => 'Each file must be an image.',
+            'image.*.mimes' => 'Allowed image formats: jpeg, png, jpg, gif.',
+            'image.*.max' => 'Image must not exceed 2MB.',
         ];
     }
 }
