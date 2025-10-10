@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\CrudController;
-// use App\Http\Controllers\Crud0Controller;
 use App\Http\Controllers\Crud1Controller;
 use App\Http\Controllers\Crud2Controller;
 use App\Http\Controllers\Crud3Controller;
@@ -40,7 +38,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
         // CRUD With Advance Validation -> app/Http/Requests/FolderName/RequestName.php
         'crud-4' => Crud4Controller::class,
-        'crud-5' => Crud5Controller::class
+        'crud-5' => Crud5Controller::class,
+        'crud-6' => Crud5Controller::class,
 
     ]);
 });
