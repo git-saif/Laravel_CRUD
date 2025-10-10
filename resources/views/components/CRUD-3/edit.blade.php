@@ -28,16 +28,23 @@
                             <div class="col-md-2"></div>
 
                             <div class="col-md-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="table-header d-flex justify-content-between align-items-stretch">
-                                        <span>Edit Entry</span>
-                                        <a href="{{ route('dashboard.crud-3.index') }}"
-                                            class="pull-right btn btn-sm btn-white h-100 d-flex align-items-center"
-                                            style="margin-left: auto;">
-                                            <i class="fa fa-list me-1"></i> Back to List
-                                        </a>
+
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
                                     </div>
+                                @endif
+
+                                <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
+                                  <h4 class="widget-title" style="color: #fff;">Edit Data</h4>
+
+                                  <span class="widget-toolbar">
+                                    <a href="{{ route('dashboard.crud-3.index') }}" style="color: #fff;">
+                                      <i class="ace-icon fa fa-list"></i> Back to List
+                                    </a>
+                                  </span>
                                 </div>
+
 
                                 <!-- Edit Form Start -->
                                 <form action="{{ route('dashboard.crud-3.update', $crud3->id) }}" method="POST"
@@ -139,16 +146,16 @@
                                     </div>
 
                                     <div class="form-actions center">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="ace-icon fa fa-save bigger-110"></i>
-                                            Update
-                                        </button>
+                                      <button type="submit" class="btn btn-sm btn-success">
+                                        Update
+                                        <i class="ace-icon fa fa-check icon-on-right bigger-110"></i>
+                                      </button>
 
-                                        <a href="{{ route('dashboard.crud-3.index') }}" class="btn btn-warning">
-                                            <i class="ace-icon fa fa-arrow-left bigger-110"></i>
-                                            Back
-                                        </a>
+                                      <a href="{{ route('dashboard.crud-3.index') }}" class="btn btn-sm btn-warning">
+                                        <i class="ace-icon fa fa-arrow-left bigger-110"></i> Back
+                                      </a>
                                     </div>
+
                                 </form>
                                 <!-- Edit Form End -->
                             </div>
