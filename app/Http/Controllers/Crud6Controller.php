@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Crud6;
 use Illuminate\Http\Request;
 
 class Crud6Controller extends Controller
@@ -11,7 +12,8 @@ class Crud6Controller extends Controller
      */
     public function index()
     {
-        //
+        $crud6 = Crud6::orderby('id', 'asc')->paginate(3);
+        return view('components.CRUD-6.index', compact('crud6'));
     }
 
     /**
@@ -19,7 +21,7 @@ class Crud6Controller extends Controller
      */
     public function create()
     {
-        //
+        return view('components.CRUD-6.create');
     }
 
     /**
@@ -43,7 +45,8 @@ class Crud6Controller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $crud6 = Crud6::findOrFail($id);
+        return view('components.CRUD-6.edit', compact('crud6'));
     }
 
     /**
