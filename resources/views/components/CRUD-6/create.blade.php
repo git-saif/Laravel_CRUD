@@ -96,15 +96,13 @@
 
                                     {{-- Multiple Image Start --}}
                                     <div id="image-upload-wrapper">
-                                        <div class="form-group">
-                                            <label for="image">Image (required)</label>
-                                            <input type="file" name="image[]" class="form-control" required>
-                                        </div>
+                                      <div class="form-group d-flex align-items-center mb-2">
+                                        <label for="image" class="me-2">Image (required)</label>
+                                        <input type="file" name="image[]" class="form-control me-2" required>
+                                      </div>
                                     </div>
 
-                                    <button type="button" id="add-image" class="btn btn-info">+ Add Another
-                                        Image</button>
-
+                                    <button type="button" id="add-image" class="btn btn-info mt-2">+ Add Another Image</button>
                                     {{-- Multiple Image End --}}
 
                                     <div class="form-group">
@@ -164,11 +162,28 @@
 
 @push('scripts')
 <script>
-    document.getElementById('add-image').addEventListener('click', function() {
-        let newInput = document.createElement('div');
-        newInput.classList.add('form-group', 'mt-2');
-        newInput.innerHTML = `<input type="file" name="image[]" class="form-control">`;
-        document.getElementById('image-upload-wrapper').appendChild(newInput);
+  document.getElementById('add-image').addEventListener('click', function() {
+    let wrapper = document.getElementById('image-upload-wrapper');
+
+    // নতুন div তৈরি করা হবে flexbox সহ
+    let newInput = document.createElement('div');
+    newInput.classList.add('form-group', 'd-flex', 'align-items-center', 'mt-2');
+
+    // innerHTML সহ delete button
+    newInput.innerHTML = `
+        <input type="file" name="image[]" class="form-control me-2" style="flex:1;">
+        <button type="button" class="btn btn-danger btn-sm remove-image">Delete</button>
+    `;
+
+    wrapper.appendChild(newInput);
+
+    // Delete button এ click listener attach
+    newInput.querySelector('.remove-image').addEventListener('click', function() {
+      wrapper.removeChild(newInput);
     });
+  });
+
 </script>
 @endpush
+
+

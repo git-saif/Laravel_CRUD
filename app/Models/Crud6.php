@@ -15,4 +15,10 @@ class Crud6 extends Model
         'phone',
         'image',
     ];
+
+    // Image field accessor (always return array)
+    public function getImageAttribute($value)
+    {
+        return json_decode($value, true) ?? [];
+    }
 }
