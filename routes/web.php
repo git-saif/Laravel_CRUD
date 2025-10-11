@@ -44,7 +44,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         'crud-6' => Crud6Controller::class,
 
         // CRUD (Category & Subcategory)
-        'crud-7' => Crud7Controller::class,
+        'crud-7' => Crud7Controller::class,  // Category
+        // 'crud-8' => Crud8Controller::class,  // Subcategory
 
     ]);
 });
