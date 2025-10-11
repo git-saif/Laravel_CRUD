@@ -109,3 +109,32 @@
 
 @endsection
 
+
+@push('scripts')
+
+{{-- Slug Auto Generator Script --}}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.getElementById('name');
+    const slugInput = document.getElementById('slug');
+
+    nameInput.addEventListener('keyup', function() {
+      let slug = nameInput.value
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '') // remove special chars
+        .replace(/\s+/g, '-') // replace spaces with -
+        .replace(/-+/g, '-'); // collapse multiple -
+      slugInput.value = slug;
+    });
+  });
+
+  nameInput.addEventListener('input', function() {
+    // same slug generation logic
+  });
+
+</script>
+
+
+@endpush
+
+
