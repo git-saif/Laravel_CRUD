@@ -8,6 +8,7 @@ use App\Http\Controllers\Crud4Controller;
 use App\Http\Controllers\Crud5Controller;
 use App\Http\Controllers\Crud6Controller;
 use App\Http\Controllers\Crud7Controller;
+use App\Http\Controllers\Crud8Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
         // CRUD (Category & Subcategory)
         'crud-7' => Crud7Controller::class,  // Category
-        // 'crud-8' => Crud8Controller::class,  // Subcategory
+        'crud-8' => Crud8Controller::class,  // Subcategory
 
     ]);
 });
