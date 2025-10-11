@@ -15,7 +15,7 @@ class Crud8Controller extends Controller
      */
     public function index()
     {
-        $crud8 = Crud8::orderby('id', 'asc')->paginate(3);
+        $crud8 = Crud8::with('category')->orderBy('id', 'asc')->paginate(3);
         return view('components.CRUD-8.index', compact('crud8'));
     }
 
@@ -74,7 +74,7 @@ class Crud8Controller extends Controller
         try {
             $crud8 = Crud8::findOrFail($id);
             $crud8->update($request->validated());
-            return redirect()->route('dashboard.crud-8.index')->with('success', 'Category updated successfully.');
+            return redirect()->route('dashboard.crud-8.index')->with('success', 'SubCategory updated successfully.');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Something went wrong: ' . $th->getMessage());
         }
@@ -88,7 +88,7 @@ class Crud8Controller extends Controller
         try {
             $crud8 = Crud8::findOrFail($id);
             $crud8->delete();
-            return redirect()->route('dashboard.crud-8.index')->with('success', 'Category deleted successfully.');
+            return redirect()->route('dashboard.crud-8.index')->with('success', 'SubCategory deleted successfully.');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Something went wrong: ' . $th->getMessage());
         }

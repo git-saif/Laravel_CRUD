@@ -64,8 +64,9 @@
                     <tr>
                       <th style="font-weight: bold;">Sl No</th>
                       <th>Category (From Crud7)</th>
-                      <th>Name</th>
-                      <th>Slug</th>
+                      <th>Category Serial</th>
+                      <th>Sub-Category Name</th>
+                      <th>Sub-Category Slug</th>
                       <th>Serial No</th>
                       <th>Status</th>
                       <th>Action</th>
@@ -73,22 +74,19 @@
                   </thead>
 
                   <tbody>
-                    @php
-                    $sl = $crud8->firstItem() ?? 1;
-                    @endphp
-
+                    @php $sl = $crud8->firstItem() ?? 1; @endphp
                     @forelse ($crud8 as $item)
                     <tr>
                       <td style="font-weight: bold;">{{ $sl++ }}.</td>
 
                       {{-- Foreign key data from Crud7 --}}
-                      <td>
-                        {{ $item->crud7->name ?? 'N/A' }}
-                      </td>
+                      <td>{{ $item->category->name ?? 'N/A' }}</td>
+                      <td>{{ $item->category->serial_no ?? 'N/A' }}</td>
 
                       <td>{{ $item->name }}</td>
                       <td>{{ $item->slug }}</td>
                       <td>{{ $item->serial_no }}</td>
+
                       <td>
                         @if ($item->status === 'active')
                         <span class="badge badge-success">Active</span>
@@ -119,10 +117,12 @@
                     </tr>
                     @empty
                     <tr>
-                      <td colspan="7" class="text-center text-danger">No data found.</td>
+                      <td colspan="8" class="text-center text-danger">No data found.</td>
                     </tr>
                     @endforelse
                   </tbody>
+
+
 
 
 
