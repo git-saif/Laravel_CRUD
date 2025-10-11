@@ -30,4 +30,9 @@ class Crud7 extends Model
             $category->slug = Str::slug($category->name);
         });
     }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Crud8::class, 'crud7_id');
+    }
 }

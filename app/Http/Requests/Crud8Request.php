@@ -12,7 +12,7 @@ class Crud8Request extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
