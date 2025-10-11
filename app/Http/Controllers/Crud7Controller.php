@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Crud7Request;
 use App\Models\Crud7;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\Crud7Request;
 
 class Crud7Controller extends Controller
 {
@@ -31,8 +32,16 @@ class Crud7Controller extends Controller
     public function store(Crud7Request $request)
     {
         try {
-            Crud7::create($request->validated());
-            return redirect()->route('dashboard.crud-7.index')->with('success', 'Category created successfully.');
+            Crud7::create([
+                'name'       => $request->name,
+                'slug'       => Str::slug($request->name),
+                'serial_no'  => $request->serial_no,
+                'status'     => $request->status,
+            ]);
+
+
+            return redirect()->route('dashboard.crud-7.index')
+                ->with('success', 'Category created successfully!');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Something went wrong: ' . $th->getMessage());
         }

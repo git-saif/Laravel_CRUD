@@ -64,9 +64,9 @@
                     <tr>
                       <th style="font-weight: bold;">Sl No</th>
                       <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Image</th>
+                      <th>Slug</th>
+                      <th>Serial No</th>
+                      <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -80,14 +80,13 @@
                     <tr>
                       <td style="font-weight: bold;">{{ $sl++ }}.</td>
                       <td>{{ $item->name }}</td>
-                      <td>{{ $item->email }}</td>
-                      <td>{{ $item->phone }}</td>
-
+                      <td>{{ $item->slug }}</td>
+                      <td>{{ $item->serial_no }}</td>
                       <td>
-                        @if($item->image)
-                        <img src="{{ asset( $item->image) }}" alt="Image" width="60" height="60" style="object-fit: cover; border-radius: 5px;">
+                        @if ($item->status === 'active')
+                        <span class="badge badge-success">Active</span>
                         @else
-                        <span class="text-muted">No Image</span>
+                        <span class="badge badge-danger">Inactive</span>
                         @endif
                       </td>
 
@@ -117,6 +116,7 @@
                     </tr>
                     @endforelse
                   </tbody>
+
                 </table>
 
                 <div class="text-center">
