@@ -23,7 +23,7 @@ yarn-error.log
 # resources/views/components/CRUD-4/create.blade.php
 # app/Http/Controllers/Crud4Controller.php
 
-resources/views/components/CRUD-7/create.blade.php
+# resources/views/components/CRUD-7/create.blade.php
 resources/views/components/CRUD-7/edit.blade.php
 
 
