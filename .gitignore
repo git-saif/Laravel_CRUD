@@ -28,7 +28,7 @@ yarn-error.log
 
 # app/Http/Controllers/Crud5Controller.php
 # database/migrations/2025_10_11_192529_create_crud8s_table.php
-app/Models/Crud8.php
+# app/Models/Crud8.php
 # routes/web.php
 
 # database\migrations\2025_10_11_192529_create_crud8s_table.php
