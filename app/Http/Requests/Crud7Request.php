@@ -36,8 +36,8 @@ class Crud7Request extends FormRequest
     protected function storeRules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:crud7s,name',
-            'serial_no' => 'required|integer|unique:crud7s,serial_no',
+            'name'       => 'required|string|max:255|unique:crud7s,name',
+            'serial_no'  => 'required|integer|unique:crud7s,serial_no',
             'status'     => 'required|in:active,inactive',
         ];
     }

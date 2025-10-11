@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Crud7 extends Model
 {
@@ -11,8 +12,22 @@ class Crud7 extends Model
 
     protected $fillable = [
         'name',
-        'slug',
+        // 'slug',
         'serial_no',
         'status',
     ];
+
+    // Auto slug generation
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($category) {
+            $category->slug = Str::slug($category->name);
+        });
+
+        static::updating(function ($category) {
+            $category->slug = Str::slug($category->name);
+        });
+    }
 }

@@ -23,14 +23,15 @@ yarn-error.log
 # resources/views/components/CRUD-4/create.blade.php
 # app/Http/Controllers/Crud4Controller.php
 
-# resources/views/components/CRUD-7/create.blade.php
-# resources/views/components/CRUD-7/edit.blade.php
+# resources/views/components/CRUD-7/
 
 
 # app/Http/Controllers/Crud5Controller.php
-# database/migrations/2025_10_07_175138_create_crud5s_table.php
-# app/Models/Crud5.php
+database/migrations/2025_10_11_192529_create_crud8s_table.php
+app/Models/Crud8.php
 # routes/web.php
+
+# database\migrations\2025_10_11_192529_create_crud8s_table.php
 
 
 # app/Http/Controllers/Crud3Controller.php
@@ -38,11 +39,6 @@ yarn-error.log
 # app/Models/Crud3.php
 # app/Models/Crud3.php
 
-
-
-resources/views/components/CRUD-200
-
-# resources\views\components\CRUD-5
 
 clr.bat
 ser.bat
