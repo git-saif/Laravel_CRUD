@@ -127,6 +127,15 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
+
+                {{-- CRUD 9 --}}
+                <li class="{{ Str::startsWith($currentRoute, 'dashboard.crud-9')  ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.crud-9.index') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        CRUD - 9
+                    </a>
+                    <b class="arrow"></b>
+                </li>
                 
             </ul>
         </li>
