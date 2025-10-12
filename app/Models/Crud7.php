@@ -31,6 +31,7 @@ class Crud7 extends Model
         });
     }
 
+    // Relationship with Crud8 (Subcategory)
     public function subcategories()
     {
         return $this->hasMany(Crud8::class, 'crud7_id');

@@ -39,7 +39,7 @@ class Crud8 extends Model
         return $this->belongsTo(Crud7::class, 'crud7_id');
     }
 
-    
+
     // relation -> parent Subcategory (Crud8)
     public function subsubcategories()
     {
