@@ -32,13 +32,7 @@ class Crud7Controller extends Controller
     public function store(Crud7Request $request)
     {
         try {
-            Crud7::create([
-                'name'       => $request->name,
-                'slug'       => Str::slug($request->name),
-                'serial_no'  => $request->serial_no,
-                'status'     => $request->status,
-            ]);
-
+            Crud7::create($request->validated());
 
             return redirect()
                 ->route('dashboard.crud-7.index')
