@@ -25,13 +25,12 @@ class Crud9Controller extends Controller
      */
     public function create()
     {
-        // Load categories
-        $categories = Crud7::orderBy('name')->get();
 
-        // Load subcategories by AJAX
-        $subcategories = collect();
+        $categories = Crud7::orderBy('name')->get();  // Load categories
 
-        // ✅ pass both variables to view
+        $subcategories = collect();   // Load subcategories by AJAX
+
+        // pass both variables to view
         return view('components.CRUD-9.create', compact('categories', 'subcategories'));
     }
 

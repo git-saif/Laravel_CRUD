@@ -44,31 +44,32 @@
                   @method('PUT')
 
                   {{-- Parent Category --}}
-                  <label for="category_id">Category</label>
-                  <select id="category_id" name="category_id" class="form-control pt-2" required>
-                    <option value="">-- Select Category --</option>
-                    @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ $cat->id == $crud9->subcategory->crud7_id ? 'selected' : '' }}>
-                      {{ $cat->name }}
-                    </option>
-                    @endforeach
-                  </select>
-
+                  <div class="form-group mt-3">
+                    <label for="category_id">Category</label>
+                    <select id="category_id" name="category_id" class="form-control pt-2" required>
+                      <option value="">-- Select Category --</option>
+                      @foreach($categories as $cat)
+                      <option value="{{ $cat->id }}" {{ $cat->id == $crud9->subcategory->crud7_id ? 'selected' : '' }}>
+                        {{ $cat->name }}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>
 
                   {{-- Parent Subcategory --}}
-                  <label for="crud8_id">Subcategory</label> 
-                  <select id="crud8_id" name="crud8_id" class="form-control" required>
-                    <option value="">-- Select Subcategory --</option>
-                    @foreach($subcategories as $sub)
-                    <option value="{{ $sub->id }}" {{ $sub->id == $crud9->crud8_id ? 'selected' : '' }}>
-                      {{ $sub->name }}
-                    </option>
-                    @endforeach
-                  </select>
+                  <div class="form-group">
+                    <label for="crud8_id">Subcategory</label> 
+                    <select id="crud8_id" name="crud8_id" class="form-control" required>
+                      <option value="">-- Select Subcategory --</option>
+                      @foreach($subcategories as $sub)
+                      <option value="{{ $sub->id }}" {{ $sub->id == $crud9->crud8_id ? 'selected' : '' }}>
+                        {{ $sub->name }}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>
 
-
-
-                  {{-- Name --}}
+                  {{-- Sub-Sub Category Name --}}
                   <div class="form-group">
                     <label for="name">Subcategory Name</label>
                     <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $crud9->name) }}" placeholder="Enter subcategory name" required>

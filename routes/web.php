@@ -56,5 +56,4 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('crud-9/subcategories/{category}', [Crud9Controller::class, 'getSubcategories'])
         ->name('crud-9.subcategories');
 
-
 });
