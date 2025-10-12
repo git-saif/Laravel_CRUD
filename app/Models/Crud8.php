@@ -32,8 +32,17 @@ class Crud8 extends Model
         });
     }
 
+
+    // relation -> parent Category (Crud7)
     public function category()
     {
         return $this->belongsTo(Crud7::class, 'crud7_id');
+    }
+
+    
+    // relation -> parent Subcategory (Crud8)
+    public function subsubcategories()
+    {
+        return $this->hasMany(Crud9::class, 'crud8_id');
     }
 }
