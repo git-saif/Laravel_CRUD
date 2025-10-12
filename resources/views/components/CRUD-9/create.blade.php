@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'CRUD8 - Sub-Category Create')
+@section('title', 'CRUD9 - Sub-Sub-Category Create')
 
 <!-- Table is here -->
 <div class="main-content">
@@ -72,33 +72,35 @@
                   @csrf
 
                   {{-- Parent Category (From Crud7) --}}
-                  {{-- Category --}}
                   <div class="form-group">
                     <label for="category_id">Category</label>
-                    <select id="category_id" class="form-control">
+                    <select id="category_id" name="category_id" class="form-control" onchange="window.location='{{ route('dashboard.crud-9.create') }}?category=' + this.value">
                       <option value="">-- Select Category --</option>
                       @foreach($categories as $cat)
-                      <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-
-                  {{-- Subcategory (parent) --}}
-                  <div class="form-group">
-                    <label for="crud8_id">Subcategory (Parent)</label>
-                    <select name="crud8_id" id="crud8_id" class="form-control @error('crud8_id') is-invalid @enderror" required>
-                      <option value="">-- Select Subcategory --</option>
-                      {{-- fill from $subcategories or JS filter below --}}
-                      @foreach($subcategories as $sub)
-                      <option value="{{ $sub->id }}" data-category="{{ $sub->crud7_id }}" {{ old('crud8_id') == $sub->id ? 'selected' : '' }}>
-                        {{ $sub->name }} ({{ $sub->category->name ?? '' }})
+                      <option value="{{ $cat->id }}" {{ (string)($selectedCategory ?? '') === (string)$cat->id ? 'selected' : '' }}>
+                        {{ $cat->name }}
                       </option>
+
                       @endforeach
                     </select>
-                    @error('crud8_id') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
 
-                  {{-- Name --}}
+                  {{-- Parent Subcategory (From Crud8) --}}
+                  <div class="form-group">
+                    <label for="crud8_id">Subcategory</label>
+                    <select name="crud8_id" id="crud8_id" class="form-control" {{ $subcategories->isEmpty() ? 'disabled' : '' }}>
+                      <option value="">-- Select Subcategory --</option>
+                      @foreach($subcategories as $sub)
+                      <option value="{{ $sub->id }}">{{ $sub->name }}</option>
+                      @endforeach
+                    </select>
+                    @if($subcategories->isEmpty())
+                    <small class="text-muted">Please select a category first</small>
+                    @endif
+                  </div>
+
+
+                  {{-- Sub-Sub Category Name --}}
                   <div class="form-group">
                     <label for="name">Sub-Sub Category Name</label>
                     <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>

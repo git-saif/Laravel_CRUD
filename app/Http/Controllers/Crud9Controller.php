@@ -25,11 +25,21 @@ class Crud9Controller extends Controller
      */
     public function create()
     {
-        // pass categories with nested subcategories to populate dropdowns & client-side filter
-        $categories = Crud7::with('subcategories')->orderBy('name')->get();
-        // also pass all subcategories as fallback
-        $subcategories = Crud8::orderBy('name')->get();
-        return view('components.CRUD-9.create', compact('categories', 'subcategories'));
+        // সব category আনবে
+        $categories = Crud7::orderBy('name')->get();
+
+        // যদি কোনো category select করা থাকে, তাহলে সেই ID নেবে
+        // $selectedCategory = $request->query('category');
+        $selectedCategory = request()->query('category'); // helper ব্যবহার
+
+        // যদি category select করা থাকে → শুধু সেই category-র subcategory গুলো আনবে
+        if ($selectedCategory) {
+            $subcategories = Crud8::where('crud7_id', $selectedCategory)->orderBy('name')->get();
+        } else {
+            $subcategories = collect(); // খালি collection
+        }
+
+        return view('components.CRUD-9.create', compact('categories', 'subcategories', 'selectedCategory'));
     }
 
     /**
