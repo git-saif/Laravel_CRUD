@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - Edit Entry')
+@section('title', 'CRUD8 - Sub-Category Edit')
 <!-- Edit form -->
 <div class="main-content">
   <div class="main-content-inner">
@@ -9,7 +9,7 @@
       <ul class="breadcrumb">
         <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li>
         <li><a href="#">Tables</a></li>
-        <li class="active">Edit Entry</li>
+        <li class="active">Edit Sub-Category</li>
       </ul>
     </div>
 
@@ -17,7 +17,7 @@
       <div class="page-header">
         <h1>
           Edit Entry
-          <small><i class="ace-icon fa fa-angle-double-right"></i> Update Existing Data</small>
+          <small><i class="ace-icon fa fa-angle-double-right"></i> Update Existing Sub-Category</small>
         </h1>
       </div>
 
@@ -29,7 +29,7 @@
 
               <div class="col-md-8">
                 <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
-                  <h4 class="widget-title" style="color: #fff;">Edit Data</h4>
+                  <h4 class="widget-title" style="color: #fff;">Edit Sub-Category</h4>
 
                   <span class="widget-toolbar">
                     <a href="{{ route('dashboard.crud-8.index') }}" style="color: #fff;">

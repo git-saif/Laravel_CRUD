@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - CRUD5')
+@section('title', 'CRUD8 - Sub-Category List')
+
 
 <div class="main-content">
   <div class="main-content-inner">
@@ -15,7 +16,7 @@
         <li>
           <a href="#">Tables</a>
         </li>
-        <li class="active">CRUD5 List</li>
+        <li class="active">CRUD8 Sub-Category List</li>
       </ul>
 
       <div class="nav-search" id="nav-search">
@@ -35,7 +36,7 @@
           Tables
           <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            CRUD5 Table List
+            CRUD-8 Sub-Category List
           </small>
         </h1>
       </div>
@@ -50,7 +51,7 @@
               </div>
 
               <div class="widget-header widget-header-flat" style="background-color: #618f8f;">
-                <h4 class="widget-title" style="color: #fff;">Category List</h4>
+                <h4 class="widget-title" style="color: #fff;">Sub Category List</h4>
                 <span class="widget-toolbar">
                   <a href="{{ route('dashboard.crud-8.create') }}" style="color: #fff;">
                     <i class="ace-icon fa fa-plus"></i> Create New Sub-Category

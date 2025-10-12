@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - CRUD')
+@section('title', 'CRUD7 - Category Create')
 <!-- Table is here -->
 <div class="main-content">
   <div class="main-content-inner">
@@ -15,7 +15,7 @@
         <li>
           <a href="#">Tables</a>
         </li>
-        <li class="active">Create New Table</li>
+        <li class="active">Create New Category Table</li>
       </ul><!-- /.breadcrumb -->
 
       <div class="nav-search" id="nav-search">
@@ -55,7 +55,7 @@
                   <div class="pull-right tableTools-container"></div>
                 </div>
                 <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
-                  <h4 class="widget-title" style="color: #fff;">Create Data</h4>
+                  <h4 class="widget-title" style="color: #fff;">Create Category</h4>
 
                   <span class="widget-toolbar">
                     <a href="{{ route('dashboard.crud-7.index') }}" style="color: #fff;">

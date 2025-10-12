@@ -24,7 +24,7 @@ class Crud8Controller extends Controller
      */
     public function create()
     {
-        $categories = Crud7::orderBy('name')->get();
+        $categories = Crud7::orderBy('serial_no')->get();
         return view('components.CRUD-8.create', compact('categories'));
     }
 

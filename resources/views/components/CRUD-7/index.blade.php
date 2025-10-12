@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - CRUD5')
+@section('title', 'CRUD7 - Category List')
+
 
 <div class="main-content">
   <div class="main-content-inner">
@@ -15,7 +16,7 @@
         <li>
           <a href="#">Tables</a>
         </li>
-        <li class="active">CRUD5 List</li>
+        <li class="active">CRUD-7 Category List</li>
       </ul>
 
       <div class="nav-search" id="nav-search">
@@ -35,7 +36,7 @@
           Tables
           <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            CRUD5 Table List
+            CRUD-7 Category List
           </small>
         </h1>
       </div>
