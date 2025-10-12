@@ -25,21 +25,25 @@ class Crud9Controller extends Controller
      */
     public function create()
     {
-        // সব category আনবে
+        // Load categories
         $categories = Crud7::orderBy('name')->get();
 
-        // যদি কোনো category select করা থাকে, তাহলে সেই ID নেবে
-        // $selectedCategory = $request->query('category');
-        $selectedCategory = request()->query('category'); // helper ব্যবহার
+        // Load subcategories by AJAX
+        $subcategories = collect();
 
-        // যদি category select করা থাকে → শুধু সেই category-র subcategory গুলো আনবে
-        if ($selectedCategory) {
-            $subcategories = Crud8::where('crud7_id', $selectedCategory)->orderBy('name')->get();
-        } else {
-            $subcategories = collect(); // খালি collection
-        }
+        // ✅ pass both variables to view
+        return view('components.CRUD-9.create', compact('categories', 'subcategories'));
+    }
 
-        return view('components.CRUD-9.create', compact('categories', 'subcategories', 'selectedCategory'));
+    
+    // NEW FUNCTION FOR AJAX
+    public function getSubcategories($categoryId)
+    {
+        $subcategories = Crud8::where('crud7_id', $categoryId)
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
+        return response()->json($subcategories);
     }
 
     /**
@@ -51,7 +55,7 @@ class Crud9Controller extends Controller
             Crud9::create($request->validated());
 
             return redirect()
-                ->route('crud9.index')
+                ->route('dashboard.crud-9.index')
                 ->with('success', 'Data saved successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while saving data.');
@@ -73,8 +77,11 @@ class Crud9Controller extends Controller
     {
         try {
             $crud9 = Crud9::findOrFail($id);
-            $categories = Crud7::with('subcategories')->orderBy('name')->get();
-            return view('components.CRUD-9.edit', compact('crud9', 'categories'));
+            $categories = Crud7::orderBy('name')->get();
+            $subcategories = Crud8::where('crud7_id', $crud9->category_id ?? $crud9->subcategory->crud7_id ?? 0)
+                ->orderBy('name')->get();
+
+            return view('components.CRUD-9.edit', compact('crud9', 'categories', 'subcategories'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Data not found.');
         }
@@ -113,4 +120,6 @@ class Crud9Controller extends Controller
             return redirect()->back()->with('error', 'An error occurred while deleting data.');
         }
     }
+
+    
 }

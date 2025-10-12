@@ -16,7 +16,7 @@
         <li>
           <a href="#">Tables</a>
         </li>
-        <li class="active">Create New Sub-Category</li>
+        <li class="active">Create New Sub-Sub-Category</li>
       </ul><!-- /.breadcrumb -->
 
       <div class="nav-search" id="nav-search">
@@ -36,7 +36,7 @@
           Tables
           <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            Create New Sub-Category
+            Create New Sub-Sub-Category
           </small>
         </h1>
       </div>
@@ -56,7 +56,7 @@
                   <div class="pull-right tableTools-container"></div>
                 </div>
                 <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
-                  <h4 class="widget-title" style="color: #fff;">Create Sub-Category</h4>
+                  <h4 class="widget-title" style="color: #fff;">Create Sub-Sub-Category</h4>
 
                   <span class="widget-toolbar">
                     <a href="{{ route('dashboard.crud-9.index') }}" style="color: #fff;">
@@ -74,30 +74,34 @@
                   {{-- Parent Category (From Crud7) --}}
                   <div class="form-group">
                     <label for="category_id">Category</label>
-                    <select id="category_id" name="category_id" class="form-control" onchange="window.location='{{ route('dashboard.crud-9.create') }}?category=' + this.value">
+                    <select id="category_id" name="category_id" class="form-control">
                       <option value="">-- Select Category --</option>
                       @foreach($categories as $cat)
-                      <option value="{{ $cat->id }}" {{ (string)($selectedCategory ?? '') === (string)$cat->id ? 'selected' : '' }}>
+                      <option value="{{ $cat->id }}" {{ isset($selectedCategory) && $selectedCategory == $cat->id ? 'selected' : '' }}>
                         {{ $cat->name }}
                       </option>
-
                       @endforeach
                     </select>
                   </div>
+
 
                   {{-- Parent Subcategory (From Crud8) --}}
                   <div class="form-group">
                     <label for="crud8_id">Subcategory</label>
-                    <select name="crud8_id" id="crud8_id" class="form-control" {{ $subcategories->isEmpty() ? 'disabled' : '' }}>
+                    <select id="crud8_id" name="crud8_id" class="form-control" disabled>
                       <option value="">-- Select Subcategory --</option>
+
+                      {{-- ✅ Only loop if $subcategories is defined and not empty --}}
+                      @isset($subcategories)
                       @foreach($subcategories as $sub)
                       <option value="{{ $sub->id }}">{{ $sub->name }}</option>
                       @endforeach
+                      @endisset
+
                     </select>
-                    @if($subcategories->isEmpty())
-                    <small class="text-muted">Please select a category first</small>
-                    @endif
                   </div>
+
+
 
 
                   {{-- Sub-Sub Category Name --}}
@@ -107,7 +111,7 @@
                     @error('name') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
 
-                  {{-- Slug --}}
+                  {{-- Slug (auto-generated) --}}
                   <div class="form-group">
                     <label for="slug">Slug (Auto)</label>
                     <input type="text" id="slug" name="slug" class="form-control" value="{{ old('slug') }}" readonly>
@@ -195,6 +199,58 @@
 
 
   </script>
+
+
+  {{-- Nested Dropdown AJAX --}}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(function() {
+
+      const $category = $('#category_id');
+      const $sub = $('#crud8_id');
+
+      // Helper: populate subcategory dropdown
+      function populateSubcategories(data) {
+        $sub.empty().append('<option value="">-- Select Subcategory --</option>');
+        if (data.length) {
+          data.forEach(item => $sub.append(`<option value="${item.id}">${item.name}</option>`));
+          $sub.prop('disabled', false);
+        } else {
+          $sub.prop('disabled', true);
+        }
+      }
+
+      // Function to fetch subcategories
+      function fetchSubcategories(categoryId) {
+        if (!categoryId) {
+          populateSubcategories([]);
+          return;
+        }
+
+        $.getJSON('{{ route("dashboard.crud-9.subcategories", ":id") }}'.replace(':id', categoryId))
+          .done(data => populateSubcategories(data))
+          .fail(() => populateSubcategories([]));
+      }
+
+      // On category change
+      $category.on('change', function() {
+        fetchSubcategories($(this).val());
+      });
+
+      // Trigger on page load if old selected category exists
+      @if(isset($selectedCategory))
+      fetchSubcategories('{{ $selectedCategory }}');
+      @endif
+
+    });
+
+  </script>
+
+
+
+
+
+
 
 
 @endpush

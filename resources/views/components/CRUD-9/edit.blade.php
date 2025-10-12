@@ -44,25 +44,28 @@
                   @method('PUT')
 
                   {{-- Parent Category --}}
-                  <select id="category_id" class="form-control">
+                  <label for="category_id">Category</label>
+                  <select id="category_id" name="category_id" class="form-control pt-2" required>
                     <option value="">-- Select Category --</option>
                     @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ old('category_id', $crud9->subcategory->crud7_id ?? '') == $cat->id ? 'selected' : '' }}>
+                    <option value="{{ $cat->id }}" {{ $cat->id == $crud9->subcategory->crud7_id ? 'selected' : '' }}>
                       {{ $cat->name }}
                     </option>
                     @endforeach
                   </select>
 
-                  <select name="crud8_id" id="crud8_id" class="form-control" required>
+
+                  {{-- Parent Subcategory --}}
+                  <label for="crud8_id">Subcategory</label> 
+                  <select id="crud8_id" name="crud8_id" class="form-control" required>
                     <option value="">-- Select Subcategory --</option>
-                    @foreach($categories as $cat)
-                    @foreach($cat->subcategories as $sub)
-                    <option value="{{ $sub->id }}" data-category="{{ $cat->id }}" {{ old('crud8_id', $crud9->crud8_id) == $sub->id ? 'selected' : '' }}>
+                    @foreach($subcategories as $sub)
+                    <option value="{{ $sub->id }}" {{ $sub->id == $crud9->crud8_id ? 'selected' : '' }}>
                       {{ $sub->name }}
                     </option>
                     @endforeach
-                    @endforeach
                   </select>
+
 
 
                   {{-- Name --}}
@@ -158,6 +161,49 @@
   });
 
 </script>
+
+{{-- AJAX script for nested dropdown --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(function() {
+    const $category = $('#category_id');
+    const $sub = $('#crud8_id');
+
+    function populateSubcategories(data, selectedId = null) {
+      $sub.empty().append('<option value="">-- Select Subcategory --</option>');
+      if (data.length) {
+        data.forEach(item => {
+          $sub.append(`<option value="${item.id}" ${item.id == selectedId ? 'selected':''}>${item.name}</option>`);
+        });
+        $sub.prop('disabled', false);
+      } else {
+        $sub.prop('disabled', true);
+      }
+    }
+
+    $category.on('change', function() {
+      const catId = $(this).val();
+      if (!catId) {
+        populateSubcategories([]);
+        return;
+      }
+
+      $.getJSON('{{ route("dashboard.crud-9.subcategories", ":id") }}'.replace(':id', catId))
+        .done(data => populateSubcategories(data))
+        .fail(() => populateSubcategories([]));
+    });
+
+    // Trigger fetch for existing selected category on page load
+    @if(isset($crud9))
+    $category.trigger('change');
+    // optionally pass selected subcategory id
+    $.getJSON('{{ route("dashboard.crud-9.subcategories", ":id") }}'.replace(':id', '{{ $crud9->subcategory->crud7_id }}'))
+      .done(data => populateSubcategories(data, '{{ $crud9->crud8_id }}'));
+    @endif
+  });
+
+</script>
+
 
 
 @endpush

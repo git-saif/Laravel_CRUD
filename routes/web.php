@@ -51,4 +51,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         'crud-9' => Crud9Controller::class,  // Sub-Sub-Category
 
     ]);
+
+    // Ajax endpoint to get subcategories for a category
+    Route::get('crud-9/subcategories/{category}', [Crud9Controller::class, 'getSubcategories'])
+        ->name('crud-9.subcategories');
+
+
 });
