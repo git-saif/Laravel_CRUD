@@ -54,9 +54,33 @@ class Crud10Controller extends Controller
         ));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Functions for AJAX to get subcategories  &&  sub-sub-categories
+    |--------------------------------------------------------------------------
+    */
+    public function getSubcategories($categoryId)
+    {
+        $subcategories = Crud8::where('crud7_id', $categoryId)
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        return response()->json($subcategories);
+    }
+
+    public function getSubSubcategories($subcategoryId)
+    {
+        $subsubcategories = Crud9::where('crud8_id', $subcategoryId)
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        return response()->json($subsubcategories);
+    }
+    // End=======================<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
     public function store(Crud10Request $request)
     {
         try {
@@ -70,31 +94,19 @@ class Crud10Controller extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         try {
             $crud10 = Crud10::findOrFail($id);
             $categories = Crud7::orderBy('name')->get();
-            $subcategories = Crud8::orderBy('name')->get();
-            $subsubcategories = Crud9::orderBy('name')->get();
 
-            return view('components.CRUD-10.edit', compact(
-                'crud10',
-                'categories',
-                'subcategories',
-                'subsubcategories'
-            ));
+            // শুধু category গুলো পাঠাও — subcategory/sub-subcategory ajax দিয়ে আসবে
+            return view('components.CRUD-10.edit', compact('crud10', 'categories'));
         } catch (\Throwable $th) {
             return back()->with('error', 'Error: ' . $th->getMessage());
         }
