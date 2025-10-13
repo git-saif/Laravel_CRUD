@@ -43,6 +43,7 @@
                   @csrf
                   @method('PUT')
 
+                  {{-- Parent Category (From Crud7) --}}
                   <div class="mb-3">
                     <label>Category *</label>
                     <select name="crud7_id" id="crud7_id" class="form-control" required>
@@ -55,6 +56,7 @@
                     </select>
                   </div>
 
+                  {{-- Parent Subcategory (From Crud8) --}}
                   <div class="mb-3">
                     <label>Sub-Category</label>
                     <select name="crud8_id" id="crud8_id" class="form-control">
@@ -62,6 +64,7 @@
                     </select>
                   </div>
 
+                  {{-- Parent Sub-Sub-category (From Crud9) --}}
                   <div class="mb-3">
                     <label>Sub-Sub-Category</label>
                     <select name="crud9_id" id="crud9_id" class="form-control">
@@ -69,42 +72,55 @@
                     </select>
                   </div>
 
-
+                  {{-- Post Serial --}}
                   <div class="mb-3">
                     <label>Post Serial *</label>
                     <input type="number" name="post_serial" class="form-control" value="{{ $crud10->post_serial }}" required>
                   </div>
 
+                  {{-- Post Name --}}
                   <div class="mb-3">
                     <label>Post Name *</label>
                     <input type="text" name="post_name" class="form-control" value="{{ $crud10->post_name }}" required>
                   </div>
 
+                  {{-- Post Title --}}
                   <div class="mb-3">
                     <label>Post Title *</label>
                     <input type="text" name="post_title" class="form-control" value="{{ $crud10->post_title }}" required>
                   </div>
 
+                  {{-- Short Description --}}
                   <div class="mb-3">
                     <label>Short Description</label>
                     <textarea name="short_description" class="form-control">{{ $crud10->short_description }}</textarea>
                   </div>
 
+                  {{-- Post Content --}}
                   <div class="mb-3">
                     <label>Post Content *</label>
                     <textarea name="post" class="form-control" rows="5">{{ $crud10->post }}</textarea>
                   </div>
 
+                  {{-- Status --}}
                   <div class="mb-3">
                     <label>Status *</label>
-                    <select name="status" class="form-control" required>
+                    <select name="status" class="form-select" required>
                       <option value="active" {{ $crud10->status == 'active' ? 'selected' : '' }}>Active</option>
                       <option value="inactive" {{ $crud10->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
                     </select>
                   </div>
 
-                  <button type="submit" class="btn btn-success">Update Post</button>
-                  <a href="{{ route('dashboard.crud-10.index') }}" class="btn btn-secondary">Cancel</a>
+                  {{-- Submit --}}
+                  <div class="form-actions text-center mt-3">
+                    <button type="submit" class="btn btn-success btn-sm">
+                      <i class="fa fa-save"></i> Save
+                    </button>
+                    <a href="{{ route('dashboard.crud-10.index') }}" class="btn btn-warning btn-sm">
+                      <i class="fa fa-arrow-left"></i> Back
+                    </a>
+                  </div>
+
                 </form>
 
                 <!-- Edit Form End -->
