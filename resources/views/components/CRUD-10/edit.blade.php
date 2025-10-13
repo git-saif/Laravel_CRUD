@@ -45,7 +45,7 @@
 
                   <div class="mb-3">
                     <label>Category *</label>
-                    <select name="crud7_id" class="form-control" required>
+                    <select name="crud7_id" id="crud7_id" class="form-control" required>
                       <option value="">-- Select Category --</option>
                       @foreach($categories as $cat)
                       <option value="{{ $cat->id }}" {{ $crud10->crud7_id == $cat->id ? 'selected' : '' }}>
@@ -57,27 +57,18 @@
 
                   <div class="mb-3">
                     <label>Sub-Category</label>
-                    <select name="crud8_id" class="form-control">
-                      <option value="">-- Optional --</option>
-                      @foreach($subcategories as $sub)
-                      <option value="{{ $sub->id }}" {{ $crud10->crud8_id == $sub->id ? 'selected' : '' }}>
-                        {{ $sub->name }}
-                      </option>
-                      @endforeach
+                    <select name="crud8_id" id="crud8_id" class="form-control">
+                      <option value="">-- Select Subcategory --</option>
                     </select>
                   </div>
 
                   <div class="mb-3">
                     <label>Sub-Sub-Category</label>
-                    <select name="crud9_id" class="form-control">
-                      <option value="">-- Optional --</option>
-                      @foreach($subsubcategories as $subsub)
-                      <option value="{{ $subsub->id }}" {{ $crud10->crud9_id == $subsub->id ? 'selected' : '' }}>
-                        {{ $subsub->name }}
-                      </option>
-                      @endforeach
+                    <select name="crud9_id" id="crud9_id" class="form-control">
+                      <option value="">-- Select Sub-Subcategory --</option>
                     </select>
                   </div>
+
 
                   <div class="mb-3">
                     <label>Post Serial *</label>
@@ -150,6 +141,82 @@
 
   nameInput.addEventListener('input', function() {
     // same slug generation logic
+  });
+
+</script>
+
+{{-- Nested Dropdown AJAX --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    const selectedCategory = '{{ $crud10->crud7_id }}';
+    const selectedSubcategory = '{{ $crud10->crud8_id }}';
+    const selectedSubsubcategory = '{{ $crud10->crud9_id }}';
+
+    // 🟢 Load Subcategories when Category changes
+    $('#crud7_id').on('change', function() {
+      let categoryId = $(this).val();
+      let $subcategory = $('#crud8_id');
+      let $subsubcategory = $('#crud9_id');
+
+      $subcategory.html('<option value="">-- Loading... --</option>');
+      $subsubcategory.html('<option value="">-- Select Sub-Subcategory --</option>');
+
+      if (categoryId) {
+        $.ajax({
+          url: `/dashboard/crud-10/get-subcategories/${categoryId}`
+          , type: 'GET'
+          , dataType: 'json'
+          , success: function(data) {
+            $subcategory.html('<option value="">-- Select Subcategory --</option>');
+            $.each(data, function(key, item) {
+              $subcategory.append(`<option value="${item.id}">${item.name}</option>`);
+            });
+
+            // যদি edit form এ আগেই কোনো subcategory selected থাকে, সেটি select করো
+            if (selectedSubcategory) {
+              $subcategory.val(selectedSubcategory).trigger('change');
+            }
+          }
+        });
+      } else {
+        $subcategory.html('<option value="">-- Select Subcategory --</option>');
+      }
+    });
+
+    // 🟢 Load Sub-Subcategories when Subcategory changes
+    $('#crud8_id').on('change', function() {
+      let subcategoryId = $(this).val();
+      let $subsubcategory = $('#crud9_id');
+
+      $subsubcategory.html('<option value="">-- Loading... --</option>');
+
+      if (subcategoryId) {
+        $.ajax({
+          url: `/dashboard/crud-10/get-subsubcategories/${subcategoryId}`
+          , type: 'GET'
+          , dataType: 'json'
+          , success: function(data) {
+            $subsubcategory.html('<option value="">-- Select Sub-Subcategory --</option>');
+            $.each(data, function(key, item) {
+              $subsubcategory.append(`<option value="${item.id}">${item.name}</option>`);
+            });
+
+            // edit form এর জন্য আগেই select করা sub-sub-category সেট করো
+            if (selectedSubsubcategory) {
+              $subsubcategory.val(selectedSubsubcategory);
+            }
+          }
+        });
+      } else {
+        $subsubcategory.html('<option value="">-- Select Sub-Subcategory --</option>');
+      }
+    });
+
+    // 🟢 পেজ লোড হবার সময়ই category change ট্রিগার করো
+    if (selectedCategory) {
+      $('#crud7_id').trigger('change');
+    }
   });
 
 </script>
