@@ -78,7 +78,7 @@
                 <form action="{{ route('dashboard.crud-10.store') }}" method="POST">
                   @csrf
 
-                  {{-- Category --}}
+                  {{-- Parent Category (From Crud7) --}}
                   <div class="form-group mb-3">
                     <label>Category *</label>
                     <select name="crud7_id" id="crud7_id" class="form-control">
@@ -89,6 +89,7 @@
                     </select>
                   </div>
 
+                  {{-- Parent Sub-Category (From Crud8) --}}
                   <div class="form-group mb-3">
                     <label>Subcategory</label>
                     <select name="crud8_id" id="crud8_id" class="form-control">
@@ -96,6 +97,7 @@
                     </select>
                   </div>
 
+                  {{-- Child Sub-Sub-Category (From Crud9) --}}
                   <div class="form-group mb-3">
                     <label>Sub-Subcategory</label>
                     <select name="crud9_id" id="crud9_id" class="form-control">
@@ -159,9 +161,7 @@
                     </a>
                   </div>
                 </form>
-
-
-                {{-- ফর্ম শেষ --}}
+                {{-- Form End --}}
               </div>
               <div class="col-md-2"></div>
             </div>

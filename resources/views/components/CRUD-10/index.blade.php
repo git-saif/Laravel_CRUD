@@ -16,7 +16,7 @@
         <li>
           <a href="#">Tables</a>
         </li>
-        <li class="active">CRUD-10 List</li>
+        <li class="active">CRUD-10 Post List</li>
       </ul>
 
       <div class="nav-search" id="nav-search">
@@ -36,7 +36,7 @@
           Tables
           <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            CRUD-10 List
+            CRUD-10 Post List
           </small>
         </h1>
       </div>
@@ -51,10 +51,10 @@
               </div>
 
               <div class="widget-header widget-header-flat" style="background-color: #618f8f;">
-                <h4 class="widget-title" style="color: #fff;">Sub Sub Category List</h4>
+                <h4 class="widget-title" style="color: #fff;">Post List</h4>
                 <span class="widget-toolbar">
                   <a href="{{ route('dashboard.crud-10.create') }}" style="color: #fff;">
-                    <i class="ace-icon fa fa-plus"></i> Create New Sub-Category
+                    <i class="ace-icon fa fa-plus"></i> Create New Post
                   </a>
                 </span>
               </div>

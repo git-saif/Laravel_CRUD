@@ -64,7 +64,7 @@
                     </select>
                   </div>
 
-                  {{-- Parent Sub-Sub-category (From Crud9) --}}
+                  {{-- Child Sub-Sub-category (From Crud9) --}}
                   <div class="mb-3">
                     <label>Sub-Sub-Category</label>
                     <select name="crud9_id" id="crud9_id" class="form-control">
