@@ -28,30 +28,23 @@ class Crud10Controller extends Controller
      */
     public function create()
     {
-        // সব category
-        $categories = Crud7::orderBy('name')->get();
+        try {
+            // All category
+            $categories = Crud7::orderBy('name')->get();
 
-        // যদি কোনো category select করা থাকে (query string থেকে)
-        $selectedCategory = request()->query('category');
+            // sub-categories & sub-sub-categories will be loaded by AJAX
+            $subcategories = collect();
+            $subsubcategories = collect();
 
-        // যদি category select করা থাকে → তার subcategories আনবে
-        $subcategories = $selectedCategory
-            ? Crud8::where('crud7_id', $selectedCategory)->orderBy('name')->get()
-            : collect();
-
-        // যদি subcategory select করা থাকে → তার sub-subcategories আনবে
-        $selectedSubcategory = request()->query('subcategory');
-        $subsubcategories = $selectedSubcategory
-            ? Crud9::where('crud8_id', $selectedSubcategory)->orderBy('name')->get()
-            : collect();
-
-        return view('components.CRUD-10.create', compact(
-            'categories',
-            'subcategories',
-            'subsubcategories',
-            'selectedCategory',
-            'selectedSubcategory'
-        ));
+            return view('components.CRUD-10.create', compact(
+                'categories',
+                'subcategories',
+                'subsubcategories'
+            ));
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard.crud-10.index')
+                ->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 
     /*
