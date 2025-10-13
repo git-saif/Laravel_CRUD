@@ -10,6 +10,7 @@ use App\Http\Controllers\Crud6Controller;
 use App\Http\Controllers\Crud7Controller;
 use App\Http\Controllers\Crud8Controller;
 use App\Http\Controllers\Crud9Controller;
+use App\Http\Controllers\Crud10Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         'crud-7' => Crud7Controller::class,  // Category
         'crud-8' => Crud8Controller::class,  // Sub-category
         'crud-9' => Crud9Controller::class,  // Sub-Sub-Category
+
+        // CRUD (Post)
+        'crud-10' => Crud10Controller::class,  // Post
 
     ]);
 
