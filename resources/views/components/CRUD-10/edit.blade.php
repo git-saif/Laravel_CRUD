@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'CRUD9 - Sub=Sub-Category Edit')
+@section('title', 'CRUD10 - Post Edit')
 <!-- Edit form -->
 <div class="main-content">
   <div class="main-content-inner">
@@ -9,7 +9,7 @@
       <ul class="breadcrumb">
         <li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li>
         <li><a href="#">Tables</a></li>
-        <li class="active">Edit Sub-Sub-Category</li>
+        <li class="active">Edit Post</li>
       </ul>
     </div>
 
@@ -17,7 +17,7 @@
       <div class="page-header">
         <h1>
           Edit Entry
-          <small><i class="ace-icon fa fa-angle-double-right"></i> Update Existing Sub-Sub-Category</small>
+          <small><i class="ace-icon fa fa-angle-double-right"></i> Update Existing Post</small>
         </h1>
       </div>
 
@@ -29,7 +29,7 @@
 
               <div class="col-md-8">
                 <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
-                  <h4 class="widget-title" style="color: #fff;">Edit Sub-Sub-Category</h4>
+                  <h4 class="widget-title" style="color: #fff;">Edit Post</h4>
 
                   <span class="widget-toolbar">
                     <a href="{{ route('dashboard.crud-9.index') }}" style="color: #fff;">
@@ -127,7 +127,6 @@
   </div>
 </div>
 <!-- /.main-content -->
-
 @endsection
 
 
@@ -154,50 +153,6 @@
   });
 
 </script>
-
-{{-- AJAX script for nested dropdown --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(function() {
-    const $category = $('#category_id');
-    const $sub = $('#crud8_id');
-
-    function populateSubcategories(data, selectedId = null) {
-      $sub.empty().append('<option value="">-- Select Subcategory --</option>');
-      if (data.length) {
-        data.forEach(item => {
-          $sub.append(`<option value="${item.id}" ${item.id == selectedId ? 'selected':''}>${item.name}</option>`);
-        });
-        $sub.prop('disabled', false);
-      } else {
-        $sub.prop('disabled', true);
-      }
-    }
-
-    $category.on('change', function() {
-      const catId = $(this).val();
-      if (!catId) {
-        populateSubcategories([]);
-        return;
-      }
-
-      $.getJSON('{{ route("dashboard.crud-9.subcategories", ":id") }}'.replace(':id', catId))
-        .done(data => populateSubcategories(data))
-        .fail(() => populateSubcategories([]));
-    });
-
-    // Trigger fetch for existing selected category on page load
-    @if(isset($crud9))
-    $category.trigger('change');
-    // optionally pass selected subcategory id
-    $.getJSON('{{ route("dashboard.crud-9.subcategories", ":id") }}'.replace(':id', '{{ $crud9->subcategory->crud7_id }}'))
-      .done(data => populateSubcategories(data, '{{ $crud9->crud8_id }}'));
-    @endif
-  });
-
-</script>
-
-
 
 @endpush
 
