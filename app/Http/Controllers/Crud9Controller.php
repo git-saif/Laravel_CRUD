@@ -34,7 +34,7 @@ class Crud9Controller extends Controller
         return view('components.CRUD-9.create', compact('categories', 'subcategories'));
     }
 
-    
+
     // NEW FUNCTION FOR AJAX
     public function getSubcategories($categoryId)
     {
@@ -119,6 +119,4 @@ class Crud9Controller extends Controller
             return redirect()->back()->with('error', 'An error occurred while deleting data.');
         }
     }
-
-    
 }
