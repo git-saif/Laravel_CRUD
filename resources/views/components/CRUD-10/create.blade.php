@@ -79,46 +79,30 @@
                   @csrf
 
                   {{-- Category --}}
-                  <div class="form-group">
-                    <label>Category <span class="text-danger">*</span></label>
-                    <select id="crud7_id" name="crud7_id" class="form-control" onchange="window.location='{{ route('dashboard.crud-10.create') }}?category=' + this.value">
+                  <div class="form-group mb-3">
+                    <label>Category *</label>
+                    <select name="crud7_id" id="crud7_id" class="form-control">
                       <option value="">-- Select Category --</option>
                       @foreach($categories as $cat)
-                      <option value="{{ $cat->id }}" {{ old('crud7_id', $selectedCategory) == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->name }}
-                      </option>
+                      <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                       @endforeach
                     </select>
-                    @error('crud7_id') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
 
-                  {{-- Subcategory --}}
-                  <div class="form-group">
+                  <div class="form-group mb-3">
                     <label>Subcategory</label>
-                    <select name="crud8_id" id="crud8_id" class="form-control" onchange="window.location='{{ route('dashboard.crud-10.create') }}?category={{ $selectedCategory }}&subcategory=' + this.value">
+                    <select name="crud8_id" id="crud8_id" class="form-control">
                       <option value="">-- Select Subcategory --</option>
-                      @foreach($subcategories as $sub)
-                      <option value="{{ $sub->id }}" {{ old('crud8_id', $selectedSubcategory) == $sub->id ? 'selected' : '' }}>
-                        {{ $sub->name }}
-                      </option>
-                      @endforeach
                     </select>
-                    @error('crud8_id') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
 
-                  {{-- Sub-Subcategory --}}
-                  <div class="form-group">
-                    <label>Sub-Subcategory (optional)</label>
+                  <div class="form-group mb-3">
+                    <label>Sub-Subcategory</label>
                     <select name="crud9_id" id="crud9_id" class="form-control">
                       <option value="">-- Select Sub-Subcategory --</option>
-                      @foreach($subsubcategories as $subsub)
-                      <option value="{{ $subsub->id }}" {{ old('crud9_id') == $subsub->id ? 'selected' : '' }}>
-                        {{ $subsub->name }}
-                      </option>
-                      @endforeach
                     </select>
-                    @error('crud9_id') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
+
 
                   {{-- Post Serial --}}
                   <div class="form-group mb-3">
@@ -216,9 +200,72 @@
     nameInput.addEventListener('input', function() {
     // same slug generation logic
     });
-
-
   </script>
+
+{{-- AJAX script for nested dropdown --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+
+    // যখন Category change হবে → Subcategory আনবে
+    $('#crud7_id').on('change', function() {
+      let categoryId = $(this).val();
+      let $subcategory = $('#crud8_id');
+      let $subsubcategory = $('#crud9_id');
+
+      $subcategory.html('<option value="">-- Loading... --</option>');
+      $subsubcategory.html('<option value="">-- Select Sub-Subcategory --</option>');
+
+      if (categoryId) {
+        $.ajax({
+          url: `/dashboard/crud-10/get-subcategories/${categoryId}`
+          , type: 'GET'
+          , dataType: 'json'
+          , success: function(data) {
+            $subcategory.html('<option value="">-- Select Subcategory --</option>');
+            $.each(data, function(key, item) {
+              $subcategory.append(`<option value="${item.id}">${item.name}</option>`);
+            });
+          }
+          , error: function() {
+            $subcategory.html('<option value="">-- Error loading data --</option>');
+          }
+        });
+      } else {
+        $subcategory.html('<option value="">-- Select Subcategory --</option>');
+      }
+    });
+
+    // যখন Subcategory change হবে → Sub-Subcategory আনবে
+    $('#crud8_id').on('change', function() {
+      let subcategoryId = $(this).val();
+      let $subsubcategory = $('#crud9_id');
+
+      $subsubcategory.html('<option value="">-- Loading... --</option>');
+
+      if (subcategoryId) {
+        $.ajax({
+          url: `/dashboard/crud-10/get-subsubcategories/${subcategoryId}`
+          , type: 'GET'
+          , dataType: 'json'
+          , success: function(data) {
+            $subsubcategory.html('<option value="">-- Select Sub-Subcategory --</option>');
+            $.each(data, function(key, item) {
+              $subsubcategory.append(`<option value="${item.id}">${item.name}</option>`);
+            });
+          }
+          , error: function() {
+            $subsubcategory.html('<option value="">-- Error loading data --</option>');
+          }
+        });
+      } else {
+        $subsubcategory.html('<option value="">-- Select Sub-Subcategory --</option>');
+      }
+    });
+
+  });
+
+</script>
 
 
 
