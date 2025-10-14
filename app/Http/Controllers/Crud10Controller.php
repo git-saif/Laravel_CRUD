@@ -89,7 +89,14 @@ class Crud10Controller extends Controller
 
     public function show(string $id)
     {
-        //
+        try {
+            $crud10 = Crud10::with(['category', 'subcategory', 'subsubcategory'])->findOrFail($id);
+
+            return view('components.CRUD-10.show', compact('crud10'));
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard.crud-10.index')
+                ->with('error', 'Error: ' . $th->getMessage());
+        }
     }
 
     public function edit(string $id)
@@ -113,7 +120,18 @@ class Crud10Controller extends Controller
         try {
             $crud10 = Crud10::findOrFail($id);
             $crud10->update($request->validated());
-            return redirect()->route('dashboard.crud-10.index')->with('success', 'Post updated successfully.');
+
+            // যদি request-এর মধ্যে "redirect_to_show" নামে hidden field থাকে তাহলে show এ redirect করবে
+            if ($request->has('redirect_to_show')) {
+                return redirect()
+                    ->route('dashboard.crud-10.show', $crud10->id)
+                    ->with('success', 'Post updated successfully.');
+            }
+            // default — index এ যাবে
+            return redirect()
+                ->route('dashboard.crud-10.index')
+                ->with('success', 'Post updated successfully.');
+                
         } catch (\Throwable $th) {
             return back()->with('error', 'Error: ' . $th->getMessage());
         }
