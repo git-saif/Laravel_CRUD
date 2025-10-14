@@ -91,9 +91,8 @@
 
                       <td>{{ $item->post_name }}</td>
                       <td>{{ $item->post_title }}</td>
-                      <td> {{ $item->short_description }}</td>
-
-                      <td>{{ $item->post }}</td>
+                      <td>{{ Str::words(strip_tags($item->short_description), 30, '...') }}</td>
+                      <td>{{ Str::words(strip_tags($item->post), 60, '...') }}</td>
                       
                       <td>
                         @if ($item->status === 'active')
