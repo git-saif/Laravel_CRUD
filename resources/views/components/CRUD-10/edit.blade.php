@@ -32,14 +32,15 @@
                   <h4 class="widget-title" style="color: #fff;">Edit Post</h4>
 
                   <span class="widget-toolbar">
-                    <a href="{{ route('dashboard.crud-9.index') }}" style="color: #fff;">
+                    <a href="{{ route('dashboard.crud-10.index') }}" style="color: #fff;">
                       <i class="ace-icon fa fa-list"></i> Back to List
                     </a>
                   </span>
                 </div>
 
                 <!-- Edit Form Start -->
-                <form action="{{ route('dashboard.crud-10.update', $crud10->id) }} " method="POST">
+                <form action="{{ route('dashboard.crud-10.update', $crud10->id) }} ?from=show" method="POST">
+
                   @csrf
                   @method('PUT')
 
