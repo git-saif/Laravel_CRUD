@@ -105,7 +105,7 @@
 
                       <td>
                         <div class="hidden-sm hidden-xs action-buttons">
-                          <a class="blue" href="#">
+                          <a class="blue" href="{{ route('dashboard.crud-10.show', $item->id) }}">
                             <i class="ace-icon fa fa-eye bigger-130"></i>
                           </a>
 
