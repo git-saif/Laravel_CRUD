@@ -39,9 +39,14 @@
                 </div>
 
                 <!-- Edit Form Start -->
-                <form action="{{ route('dashboard.crud-10.update', $crud10->id) }}" method="POST">
+                <form action="{{ route('dashboard.crud-10.update', $crud10->id) }} " method="POST">
                   @csrf
                   @method('PUT')
+
+                   <!-- Hidden input for redirect to show page after update -->
+                   @if (request()->query('from') === 'show')
+                   <input type="hidden" name="redirect_to_show" value="1">
+                   @endif
 
                   {{-- Parent Category (From Crud7) --}}
                   <div class="mb-3">
@@ -93,17 +98,17 @@
                   {{-- Short Description --}}
                   <div class="mb-3">
                     <label>Short Description</label>
-                    <textarea name="short_description" class="form-control">{{ $crud10->short_description }}</textarea>
+                    <textarea name="short_description" rows="3" class="form-control">{{ $crud10->short_description }}</textarea>
                   </div>
 
                   {{-- Post Content --}}
                   <div class="mb-3">
                     <label>Post Content *</label>
-                    <textarea name="post" class="form-control" rows="5">{{ $crud10->post }}</textarea>
+                    <textarea name="post" class="form-control" rows="6">{{ $crud10->post }}</textarea>
                   </div>
 
                   {{-- Status --}}
-                  <div class="mb-3">
+                  <div class="form-group" style="margin-top: 10px;">
                     <label>Status *</label>
                     <select name="status" class="form-select" required>
                       <option value="active" {{ $crud10->status == 'active' ? 'selected' : '' }}>Active</option>
