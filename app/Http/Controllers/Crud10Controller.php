@@ -105,9 +105,9 @@ class Crud10Controller extends Controller
     {
         try {
             $crud10 = Crud10::findOrFail($id);
-            $categories = Crud7::orderBy('name')->get();
+            $categories = Crud7::where('status', 'active')->orderBy('serial_no')->get();
 
-            // শুধু category গুলো পাঠাও — subcategory/sub-subcategory ajax দিয়ে আসবে
+            // only Category will be loaded — subcategory/sub-subcategory ajax will load by AJAX
             return view('components.CRUD-10.edit', compact('crud10', 'categories'));
         } catch (\Throwable $th) {
             return back()->with('error', 'Error: ' . $th->getMessage());
