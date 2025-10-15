@@ -15,7 +15,7 @@ class Crud8Controller extends Controller
      */
     public function index()
     {
-        $crud8 = Crud8::with('category')->orderBy('id', 'asc')->paginate(3);
+        $crud8 = Crud8::with('category')->orderBy('id', 'asc')->paginate(10);
         return view('components.CRUD-8.index', compact('crud8'));
     }
 
@@ -24,7 +24,7 @@ class Crud8Controller extends Controller
      */
     public function create()
     {
-        $categories = Crud7::orderBy('serial_no')->get();
+        $categories = Crud7::where('status', 'active')->orderBy('serial_no')->get();
         return view('components.CRUD-8.create', compact('categories'));
     }
 
