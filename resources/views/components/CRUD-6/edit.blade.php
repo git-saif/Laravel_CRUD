@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - Edit Entry')
+@section('title', 'CRUD6 - Edit Entry')
 
 <div class="main-content">
     <div class="main-content-inner">
