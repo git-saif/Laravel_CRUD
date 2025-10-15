@@ -151,6 +151,14 @@
                     CRUD - 10
                   </a>
                 </li>
+
+                {{-- Company --}}
+                <li class="{{ request()->routeIs('dashboard.company.*') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.company.index') }}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Company Settings
+                    </a>
+                </li>
                 
             </ul>
         </li>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Crud1Controller;
 use App\Http\Controllers\Crud2Controller;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Crud7Controller;
 use App\Http\Controllers\Crud8Controller;
 use App\Http\Controllers\Crud9Controller;
 use App\Http\Controllers\Crud10Controller;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
         // CRUD (Post)
         'crud-10' => Crud10Controller::class,  // Post
+
+        // Company Settings
+        'company' => CompanyController::class,
 
     ]);
     
