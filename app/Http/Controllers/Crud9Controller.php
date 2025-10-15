@@ -26,7 +26,7 @@ class Crud9Controller extends Controller
     public function create()
     {
 
-        $categories = Crud7::orderBy('name')->get();  // Load categories
+        $categories = Crud7::where('status', 'active')->orderBy('name')->get();  // Load categories
 
         $subcategories = collect();   // Load subcategories by AJAX
 
@@ -39,6 +39,7 @@ class Crud9Controller extends Controller
     public function getSubcategories($categoryId)
     {
         $subcategories = Crud8::where('crud7_id', $categoryId)
+            ->where('status', 'active')
             ->orderBy('name')
             ->get(['id', 'name']);
 
@@ -76,8 +77,8 @@ class Crud9Controller extends Controller
     {
         try {
             $crud9 = Crud9::findOrFail($id);
-            $categories = Crud7::orderBy('name')->get();
-            $subcategories = Crud8::where('crud7_id', $crud9->category_id ?? $crud9->subcategory->crud7_id ?? 0)
+            $categories = Crud7::where('status', 'active')->orderBy('name')->get();
+            $subcategories = Crud8::where('status', 'active')->where('crud7_id', $crud9->category_id ?? $crud9->subcategory->crud7_id ?? 0)
                 ->orderBy('name')->get();
 
             return view('components.CRUD-9.edit', compact('crud9', 'categories', 'subcategories'));
