@@ -54,7 +54,7 @@
                 <h4 class="widget-title" style="color: #fff;">Sub Sub Category List</h4>
                 <span class="widget-toolbar">
                   <a href="{{ route('dashboard.crud-9.create') }}" style="color: #fff;">
-                    <i class="ace-icon fa fa-plus"></i> Create New Sub-Category
+                    <i class="ace-icon fa fa-plus"></i> Create New Sub-Sub-Category
                   </a>
                 </span>
               </div>
