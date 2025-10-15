@@ -30,7 +30,7 @@ class Crud10Controller extends Controller
     {
         try {
             // All category
-            $categories = Crud7::orderBy('name')->get();
+            $categories = Crud7::where('status', 'active')->orderBy('name')->get();
 
             // sub-categories & sub-sub-categories will be loaded by AJAX
             $subcategories = collect();
@@ -55,6 +55,7 @@ class Crud10Controller extends Controller
     public function getSubcategories($categoryId)
     {
         $subcategories = Crud8::where('crud7_id', $categoryId)
+            ->where('status', 'active')
             ->select('id', 'name')
             ->orderBy('name')
             ->get();
@@ -65,6 +66,7 @@ class Crud10Controller extends Controller
     public function getSubSubcategories($subcategoryId)
     {
         $subsubcategories = Crud9::where('crud8_id', $subcategoryId)
+            ->where('status', 'active')
             ->select('id', 'name')
             ->orderBy('name')
             ->get();
