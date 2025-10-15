@@ -10,8 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('crud5s', function (Blueprint $table) {
+    {   Schema::create('crud5s', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
@@ -20,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+     
 
     /**
      * Reverse the migrations.

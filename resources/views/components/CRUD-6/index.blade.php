@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - CRUD')
+@section('title', 'CRUD6 - List')
 <!-- Table is here -->
 <div class="main-content">
     <div class="main-content-inner">

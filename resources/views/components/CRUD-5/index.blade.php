@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - CRUD5')
+@section('title', 'CRUD5 - List')
+
 
 <div class="main-content">
   <div class="main-content-inner">
@@ -53,7 +54,7 @@
                 <h4 class="widget-title" style="color: #fff;">CRUD5 List</h4>
                 <span class="widget-toolbar">
                   <a href="{{ route('dashboard.crud-5.create') }}" style="color: #fff;">
-                    <i class="ace-icon fa fa-plus"></i> Create CRUD5
+                    <i class="ace-icon fa fa-plus"></i> Create CRUD-5
                   </a>
                 </span>
               </div>

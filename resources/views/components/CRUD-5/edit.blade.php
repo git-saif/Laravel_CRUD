@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 @section('title', 'Smart ERP - Edit Entry')
 <!-- Edit form -->
@@ -38,7 +37,7 @@
                   </span>
                 </div>
 
-                <!-- Edit Form Start -->
+                <!-- Main Edit Form Start -->
                 <form action="{{ route('dashboard.crud-5.update', $crud5->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')

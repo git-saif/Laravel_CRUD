@@ -14,7 +14,7 @@ class Crud5Controller extends Controller
      */
     public function index()
     {
-        $crud5 = Crud5::orderby('id', 'asc')->paginate(3);
+        $crud5 = Crud5::orderby('id', 'asc')->paginate(8);
         return view('components.CRUD-5.index', compact('crud5'));
     }
 

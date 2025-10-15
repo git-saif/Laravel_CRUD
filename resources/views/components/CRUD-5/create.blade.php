@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Smart ERP - CRUD')
+@section('title', 'CRUD5- Create')
+
 <!-- Table is here -->
 <div class="main-content">
   <div class="main-content-inner">
@@ -55,7 +56,7 @@
                   <div class="pull-right tableTools-container"></div>
                 </div>
                 <div class="widget-header widget-header-flat " style="background-color: #618f8f;">
-                  <h4 class="widget-title" style="color: #fff;">Create Data</h4>
+                  <h4 class="widget-title" style="color: #fff;">Create CRUD5</h4>
 
                   <span class="widget-toolbar">
                     <a href="{{ route('dashboard.crud-5.index') }}" style="color: #fff;">
@@ -66,9 +67,8 @@
 
                 <!-- div.table-responsive -->
 
-                <!-- div.dataTables_borderWrap -->
+                <!-- Main Form Start -->
                 <form action="{{ route('dashboard.crud-5.store') }}" method="POST" enctype="multipart/form-data">
-
                   @csrf
 
                   <div class="form-group">
@@ -91,19 +91,6 @@
                     <input type="file" name="image" class="form-control" required>
                   </div>
 
-                  {{-- <div class="form-group">
-                    <label for="status">Status</label><br>
-
-                    <label>
-                      <input type="radio" name="status" value="active" checked> Active
-                    </label>
-                    &nbsp;&nbsp;
-                    <label>
-                      <input type="radio" name="status" value="inactive"> Inactive
-                    </label>
-                  </div> --}}
-
-
                   <div class="form-actions center">
                     <button type="submit" class="btn btn-sm btn-success">
                       Save
@@ -116,7 +103,7 @@
 
                   </div>
                 </form>
-                {{-- ফর্ম শেষ --}}
+                {{-- Form End --}}
               </div>
               <div class="col-md-2"></div>
             </div>
