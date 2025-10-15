@@ -189,6 +189,10 @@
         return;
       }
 
+      // 🔹 Show loading message before request
+      $sub.html('<option value="">-- Loading... --</option>').prop('disabled', true);
+
+
       $.getJSON('{{ route("dashboard.crud-9.subcategories", ":id") }}'.replace(':id', catId))
         .done(data => populateSubcategories(data))
         .fail(() => populateSubcategories([]));
