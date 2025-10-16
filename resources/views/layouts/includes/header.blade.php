@@ -11,10 +11,20 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="{{ url('/dashboard') }}" class="navbar-brand">
                 <small>
+                  @if ($companySettings)
+
                     <i class="fa fa-leaf"></i>
-                    Ace Admin
+                  {{-- <img src="{{ asset($activeCompany->company_logo) }}" alt="Logo"> --}}
+                  {{ $companySettings->company_name }} Admin
+
+                  @endif
+
+
+
+
+
                 </small>
             </a>
         </div>

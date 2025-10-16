@@ -114,7 +114,10 @@
 
                         Welcome to
                         <strong class="green">
-                            Ace
+
+                           {{ $companySettings->company_name ?? 'No Company Active' }} Admin
+
+                           
                             <small>(v1.4)</small>
                         </strong>
 
