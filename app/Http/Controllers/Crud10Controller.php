@@ -8,6 +8,7 @@ use App\Models\Crud9;
 use App\Models\Crud10;
 use Illuminate\Http\Request;
 use App\Http\Requests\Crud10Request;
+use Illuminate\Support\Facades\Storage;
 
 class Crud10Controller extends Controller
 {
@@ -150,5 +151,35 @@ class Crud10Controller extends Controller
         } catch (\Throwable $th) {
             return back()->with('error', 'Error: ' . $th->getMessage());
         }
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |               Image upload handler for CKEditor
+    |--------------------------------------------------------------------------
+    */
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            // Ensure the folder exists
+            $folder = public_path('uploads/ckeditor');
+            if (!file_exists($folder)) {
+                mkdir($folder, 0775, true);
+            }
+
+            $file->move($folder, $filename);
+            $url = asset('uploads/ckeditor/' . $filename);
+
+            // CKEditor expects this JSON
+            return response()->json([
+                'url' => $url
+            ]);
+        }
+
+        return response()->json(['error' => 'No file uploaded.'], 400);
     }
 }
