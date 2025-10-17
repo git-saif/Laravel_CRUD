@@ -134,10 +134,10 @@
                     @error('short_description') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
 
-                  {{-- Full Post --}}
+                  {{-- Post Content --}}
                   <div class="form-group mb-3">
                     <label>Full Post *</label>
-                    <textarea name="post" class="form-control" rows="5">{{ old('post') }}</textarea>
+                    <textarea id="editor" name="post" class="form-control" rows="6">{{ old('post', $crud10->post ?? '') }}</textarea>
                     @error('post') <small class="text-danger">{{ $message }}</small> @enderror
                   </div>
 
@@ -267,6 +267,23 @@
 
 </script>
 
+
+<!-- CKEditor 5 Classic (CDN) -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+    .create(document.querySelector('#editor'), {
+      simpleUpload: {
+        uploadUrl: '{{ route("dashboard.crud-10.uploadImage") }}'
+        , headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+      }
+    })
+    .then(editor => console.log('Editor initialized', editor))
+    .catch(error => console.error(error));
+
+</script>
 
 
 
