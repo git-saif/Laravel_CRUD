@@ -51,8 +51,8 @@
 
       
         {{-- CRUD SECTION (1–6) --}}
-      <li class="{{ Str::startsWith($currentRoute, 'dashboard.crud-') && (int)explode('.', explode('-', $currentRoute)[1])[0] <= 6 ? 'active open' : '' }}">
-        <a href="javascript:void(0);" class="dropdown-toggle">
+      <li class="{{ request()->routeIs('dashboard.crud-1.*') || request()->routeIs('dashboard.crud-2.*') || request()->routeIs('dashboard.crud-3.*') || request()->routeIs('dashboard.crud-4.*') || request()->routeIs('dashboard.crud-5.*') || request()->routeIs('dashboard.crud-6.*') ? 'active open' : '' }}">
+        <a href="#" class="dropdown-toggle">
           <i class="menu-icon fa fa-list"></i>
           <span class="menu-text"> CRUD </span>
           <b class="arrow fa fa-angle-down"></b>
@@ -61,15 +61,40 @@
         <b class="arrow"></b>
 
         <ul class="submenu">
-          @for ($i = 1; $i <= 6; $i++) <li class="{{ request()->routeIs('dashboard.crud-' . $i . '.*') ? 'active' : '' }}">
-            <a href="{{ route('dashboard.crud-' . $i . '.index') }}">
-              <i class="menu-icon fa fa-caret-right"></i>
-              CRUD - {{ $i }}
+          {{-- CRUD 1–6 Simple --}}
+          <li class="{{ request()->routeIs('dashboard.crud-1.*') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.crud-1.index') }}">
+              <i class="menu-icon fa fa-caret-right"></i> CRUD - 1
             </a>
+          </li>
+          <li class="{{ request()->routeIs('dashboard.crud-2.*') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.crud-2.index') }}">
+              <i class="menu-icon fa fa-caret-right"></i> CRUD - 2
+            </a>
+          </li>
+          <li class="{{ request()->routeIs('dashboard.crud-3.*') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.crud-3.index') }}">
+              <i class="menu-icon fa fa-caret-right"></i> CRUD - 3
+            </a>
+          </li>
+          <li class="{{ request()->routeIs('dashboard.crud-4.*') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.crud-4.index') }}">
+              <i class="menu-icon fa fa-caret-right"></i> CRUD - 4
+            </a>
+          </li>
+          <li class="{{ request()->routeIs('dashboard.crud-5.*') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.crud-5.index') }}">
+              <i class="menu-icon fa fa-caret-right"></i> CRUD - 5
+            </a>
+          </li>
+          <li class="{{ request()->routeIs('dashboard.crud-6.*') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.crud-6.index') }}">
+              <i class="menu-icon fa fa-caret-right"></i> CRUD - 6
+            </a>
+          </li>
+        </ul>
       </li>
-      @endfor
-      </ul>
-      </li>
+
 
 
     {{-- ==========================
