@@ -70,4 +70,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     // Ajax endpoint to get sub-sub-categories for a subcategory for Post create page
     Route::get('crud-10/get-subsubcategories/{subcategoryId}', [Crud10Controller::class, 'getSubSubcategories'])->name('crud-10.get-subsubcategories');
 
+    // image upload for Sumernote (AJAX)
+    Route::post('crud-10/upload-image', [Crud10Controller::class, 'uploadImage'])->name('crud-10.uploadImage');
 });
