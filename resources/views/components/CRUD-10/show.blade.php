@@ -83,7 +83,10 @@
                   </tr>
                   <tr>
                     <th>Post Content</th>
-                    <td>{!! nl2br(e($crud10->post)) !!}</td>
+                    {{-- ✅ Render HTML content safely --}}
+                    <td>{!! $crud10->post !!}</td>
+
+                    {{-- <td>{!! nl2br(e($crud10->post)) !!}</td> --}}
                   </tr>
                   <tr>
                     <th>Status</th>
