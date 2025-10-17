@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('crud9_id')->nullable()->constrained('crud9s')->onDelete('set null'); // sub-sub optional
 
             // Post Fields
-            $table->string('post_serial')->unique();
+            $table->integer('post_serial')->unique();
             $table->string('post_name')->unique();
             $table->string('post_title');
             $table->text('short_description')->nullable();
