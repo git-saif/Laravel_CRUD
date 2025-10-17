@@ -105,7 +105,7 @@
                   {{-- Post Content --}}
                   <div class="mb-3">
                     <label>Post Content *</label>
-                    <textarea name="post" class="form-control" rows="6">{{ $crud10->post }}</textarea>
+                    <textarea id="editor" name="post" class="form-control" rows="6">{{ $crud10->post }}</textarea>
                   </div>
 
                   {{-- Status --}}
@@ -242,6 +242,31 @@
   });
 
 </script>
+
+
+<!-- CKEditor 5 Classic (CDN) -->
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/ckeditor.js"></script> --}}
+
+
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector('#editor'), {
+        simpleUpload: {
+          uploadUrl: '{{ route("dashboard.crud-10.uploadImage") }}'
+          , headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+
+</script>
+
 
 @endpush
 
