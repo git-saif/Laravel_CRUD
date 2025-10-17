@@ -42,7 +42,8 @@
               </a>
 
                 <!-- Back Button -->
-                <a href="{{ route('dashboard.crud-10.index') }}" style="color: #fff; margin-right: 10px;  border-left: 1px solid #fff;">
+                <a href="{{ route('dashboard.crud-10.index') }}?from=show" style=" color: #fff; margin-right: 10px; border-left: 1px solid #fff;">
+
                   <i class="ace-icon fa fa-arrow-left" style="margin-left: 5px;"></i> Back to List
                 </a>
               </span>

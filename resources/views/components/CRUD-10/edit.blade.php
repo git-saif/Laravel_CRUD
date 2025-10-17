@@ -32,9 +32,19 @@
                   <h4 class="widget-title" style="color: #fff;">Edit Post</h4>
 
                   <span class="widget-toolbar">
-                    <a href="{{ route('dashboard.crud-10.index') }}" style="color: #fff;">
-                      <i class="ace-icon fa fa-list"></i> Back to List
+                  {{-- Dynamic Back Button --}}
+                    @if (request()->query('from') === 'show')
+                    {{-- যদি show থেকে আসে --}}
+                    <a href="{{ route('dashboard.crud-10.show', $crud10->id) }}" style="color: #fff;">
+                      <i class="fa fa-arrow-left"></i> Back to Show
                     </a>
+                    @else
+                    {{-- অন্যথায় index এ ফিরে যাবে --}}
+                    <a href="{{ route('dashboard.crud-10.index') }}" style="color: #fff;">
+                      <i class="fa fa-arrow-left"></i> Back to Index
+                    </a>
+                    @endif
+
                   </span>
                 </div>
 
@@ -245,9 +255,6 @@
 
 
 <!-- CKEditor 5 Classic (CDN) -->
-{{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/ckeditor.js"></script> --}}
-
-
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
