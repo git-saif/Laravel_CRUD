@@ -73,3 +73,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     // image upload for CKEditor (AJAX)
     Route::post('crud-10/upload-image', [Crud10Controller::class, 'uploadImage'])->name('crud-10.uploadImage');
 });
+
+
+
+Route::get('api/index', function () { return view('api.pages.Crud-1.index'); });
+Route::get('api/create', function () { return view('api.pages.Crud-1.create'); });
+Route::get('api/edit', function () { return view('api.pages.Crud-1.edit'); });
+Route::get('api/show', function () { return view('api.pages.Crud-1.show'); });
