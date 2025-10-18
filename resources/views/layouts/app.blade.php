@@ -4,7 +4,10 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title') </title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
     <meta name="description" content="@yield('meta_description', 'Overview, Stats, Tables')" />
