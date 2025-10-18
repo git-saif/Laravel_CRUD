@@ -20,7 +20,9 @@ yarn-error.log
 /public/uploads
 
 
-resources/views/api/pages/CRUD-1
+# resources/views/api/pages/CRUD-1
+resources/views/api/pages/CRUD-1/create.blade.php
+resources/views/api/pages/CRUD-1/edit.blade.php
 
 # app/Http/Controllers/Crud4Controller.php
 # resources/views/components/CRUD-8/create.blade.php
