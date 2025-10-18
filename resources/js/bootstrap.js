@@ -7,7 +7,15 @@
 import axios from 'axios';
 window.axios = axios;
 
+// AJAX Request চিনিয়ে দেওয়া
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+// Laravel-এর CSRF Token Axios-এ পাঠানো
+let token = document.head.querySelector('meta[name="csrf-token"]');
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+}
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
