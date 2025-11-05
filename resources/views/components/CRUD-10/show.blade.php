@@ -32,22 +32,17 @@
         <div class="col-xs-12">
           <div class="widget-box">
             <div class="widget-header widget-header-flat" style="background-color: #618f8f;">
-
               <h4 class="widget-title" style="color: #fff;">Post Information</h4>
               <span class="widget-toolbar">
-
               <!-- Edit Button -->
               <a href="{{ route('dashboard.crud-10.edit', $crud10->id ) }}?from=show" style="color: #fff; margin-right: 10px; padding-left: 10px;">
                 <i class="ace-icon fa fa-pencil"></i> Edit Post
               </a>
-
-                <!-- Back Button -->
-                <a href="{{ route('dashboard.crud-10.index') }}?from=show" style=" color: #fff; margin-right: 10px; border-left: 1px solid #fff;">
-
-                  <i class="ace-icon fa fa-arrow-left" style="margin-left: 5px;"></i> Back to List
-                </a>
+              <!-- Back Button -->
+              <a href="{{ route('dashboard.crud-10.index') }}?from=show" style=" color: #fff; margin-right: 10px; border-left: 1px solid #fff;">
+                <i class="ace-icon fa fa-arrow-left" style="margin-left: 5px;"></i> Back to List
+              </a>
               </span>
-
             </div>
 
             <div class="widget-body">
